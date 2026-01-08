@@ -38,14 +38,27 @@ The photo above demonstrates the three main pages (features) of the application.
 - Simple entry creation to track time spent
 - Streak tracking
 - Active Leaderboard ranking
+
+#### **Additional Features for future development**
 - Review and deletion of history (list of previous entries)
+- Photo and text entries to add description to entries
+- Ability to add other users as friends
+- Ability to view entries of friends
+
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
+- **HTML** - Three HTML pages, as shown in the description above. 
+  - Login page
+  - Entry creation page
+  - Leaderboard page
+- **CSS** - Application styling that reflects the themes of the application. This will include nature-like colors such as
+  - Green
+  - Sky Blue
+  - Brown
+  - Grey
 - **React** - Description here
 - **Service** - Description here
 - **DB/Login** - Description here
