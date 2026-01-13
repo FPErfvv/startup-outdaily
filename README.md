@@ -1,8 +1,11 @@
 # Nature Tracker
 
 [My Notes](notes.md)
-
+Startup Description
 The Nature Tracker is a creative and innovative application that is used to encourage people to spend more time in nature. It allows users to log outdoor activities and keeps track of their streak for how many days in a row they spent outside.
+
+Startup AWS Notes
+I was able to successfully create an aws server (although I didn't click the free tier unfortunately). Everything worked fine, until I tried to run the server and found that I had accidentally chosen the wrong AMI and needed to change that. I figured this out because I could ssh onto the server but there was nothing there, and thus when I tried to access it through the web interface nothing came up. So, I deleted the first instance of the server and restarted with the correct AMI, and then everything worked as expected.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
