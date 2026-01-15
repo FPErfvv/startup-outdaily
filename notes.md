@@ -25,6 +25,8 @@ Here is the link to the codepen page that I forked for the input html practice:
 [codepen](https://codepen.io/FPErfvv/pen/myERXYG)
 Here is the link to the codepen page for the media practice: [codepen](https://codepen.io/FPErfvv/pen/zxBNRgN)
 
+When copying the files over, I accidentally ran the script from the wrong directory (where my pem file was held). This caused it to copy everything from that directory over, which I didn't want, so I have to make sure to run it inside the simon-html so it only copies content there.
+
 
 ## CSS
 
