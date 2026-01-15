@@ -22,7 +22,7 @@ No problems worked just like it said in the [instruction](https://github.com/web
 
 Here is the link to the codepen page that I forked for the structure assignment: [codepen](https://codepen.io/FPErfvv/pen/GgqryBr)
 Here is the link to the codepen page that I forked for the input html practice:
-[codepen](https://codepen.io/leesjensen/pen/dyVdNej)
+[codepen](https://codepen.io/FPErfvv/pen/myERXYG)
 
 
 ## CSS
