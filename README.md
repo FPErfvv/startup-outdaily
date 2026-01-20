@@ -18,7 +18,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 Have you ever felt the call of the wild? Have you ever felt like something was missing within yourself? We all have! Due to our fast paced and work oriented society, we often miss out on opportunities to stop and literally smell the roses. This application, the **Nature Tracker**, encourages users to spend more time outside and enjoy the wonderous world in which we live. Its simple design allows the user to track time spent outside and even compete with others to see who can spend the most consecutive days enjoying the beauties of mother nature. Spending more time outside can literally change your life, as mentioned in [this article](https://hsph.harvard.edu/news/time-spent-in-nature-can-boost-physical-and-mental-well-being/).
 ### Design
 
-![Design image](naturetrackerdesign.jpg)
+![Design image](images/naturetrackerdesign.jpg)
 
 The photo above demonstrates the three main pages (features) of the application.
 
@@ -54,7 +54,7 @@ I am going to use the required technologies in the following ways.
   - User login information
   - User entry streak
   - User scoring (points/ranking)
-- **WebSocket** - As users input entries and the user scores are updated, the websocket will update the ranking of the leaderboard, as well as update the information that the other users can see of each other (streak sharing). When you are displaced from the podium, it will send notifacations to let you know that your place has been taken.
+- **WebSocket** - As users input entries and the user scores are updated, the websocket will update the ranking of the leaderboard, as well as update the information that the other users can see of each other (streak sharing). When you are displaced from the podium, it will send notifications to let you know that your place has been taken.
 
 ## 🚀 AWS deliverable
 
@@ -67,9 +67,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **HTML pages** - I added three pages. The login and about page: `index.html`, The entry page: `entry.html`, and the leaderboard page: `leaderboard.html`.
-- [ ] **Proper HTML element usage** - I separated each page into the header, main, and footer section. Then, I used various tags to add further structure, like table, li, label, input, nav, fieldset, etc.
-- [ ] **Links** - I added a variety of links. There are links in the header to other pages. There is a link in the about section of `index.html` to a paper about nature, and then there is a link in the footer to my GitHub page.
-- [ ] **Text** - I added a text description in the login page to describe the application. Then, there are various places in the document where notes/descriptions are added. For example, if you hover over the points, it adds additional description. 
+- [x] **Proper HTML element usage** - I separated each page into the header, main, and footer section. Then, I used various tags to add further structure, like table, li, label, input, nav, fieldset, etc.
+- [x] **Links** - I added a variety of links. There are links in the header to other pages. There is a link in the about section of `index.html` to a paper about nature, and then there is a link in the footer to my GitHub page.
+- [x] **Text** - I added a text description in the login page to describe the application. Then, there are various places in the document where notes/descriptions are added. For example, if you hover over the points, it adds additional description. 
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.
 - [ ] **Login placeholder** - I did not complete this part of the deliverable.
