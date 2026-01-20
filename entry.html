@@ -18,7 +18,32 @@
                 </nav>
         </header>
     <main>
-        MAIN
+        <h1>Streak: 9 days</h1>
+        <section> 
+            <fieldset>
+                <legend><h4>New Entry</h4> </legend>
+                <form method="post">
+                    <div>
+                        <label for="entryTitle">Entry Title</label>
+                        <input type="text" id="entryTitle" name="entryTitle" placeholder="Title" required/>
+                    </div>
+                    <div>
+                        <label for="entryDate">Entry Date</label>
+                        <input type="date" id="entryDate" name="entryDate" required/>
+                    </div>
+                    <div>
+                        <label for="entryDuration">Entry Duration</label>
+                        <input type="number" id="entryDuration" name="entryDuration" min="1" required />
+                    </div>
+                    <div>
+                        <label for="entryDescription">Entry Description (optional)</label>
+                        <textarea id="entryDescription" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?"></textarea>
+                    </div>
+                </form>
+                <br/>
+                <button type="submit">Submit Entry</button>
+            </fieldset>
+        </section>
     </main>
     <br>
     <footer>
