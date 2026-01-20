@@ -72,9 +72,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Text** - I added a text description in the login page to describe the application. Then, there are various places in the document where notes/descriptions are added. For example, if you hover over the points, it adds additional description. 
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **Login placeholder** - I added a input tag for the password and email of the user, which will allow them to log into the webpage.
+- [x] **DB data placeholder** - The `entry.html` pages shows the users streak and points, which will be stored in the database. Also, the `leaderboard.html` will show the streak and points from other users, which will be also drawn from the database. 
+- [x] **WebSocket placeholder** - As soon as an entry is added that changes the points of a user and thus changes the ranking, the leaderboard will change on all users devices. This is shown on the `leaderboard.html` page. 
 
 ## 🚀 CSS deliverable
 
