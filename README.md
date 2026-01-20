@@ -66,9 +66,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I added three pages. The login and about page: `index.html`, The entry page: `entry.html`, and the leaderboard page: `leaderboard.html`.
+- [ ] **Proper HTML element usage** - I separated each page into the header, main, and footer section. Then, I used various tags to add further structure, like table, li, label, input, nav, fieldset, etc.
+- [ ] **Links** - I added a variety of links. There are links in the header to other pages. There is a link in the about section of `index.html` to a paper about nature, and then there is a link in the footer to my GitHub page.
 - [ ] **Text** - I did not complete this part of the deliverable.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.
