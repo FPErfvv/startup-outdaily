@@ -70,8 +70,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Proper HTML element usage** - I separated each page into the header, main, and footer section. Then, I used various tags to add further structure, like table, li, label, input, nav, fieldset, etc.
 - [x] **Links** - I added a variety of links. There are links in the header to other pages. There is a link in the about section of `index.html` to a paper about nature, and then there is a link in the footer to my GitHub page.
 - [x] **Text** - I added a text description in the login page to describe the application. Then, there are various places in the document where notes/descriptions are added. For example, if you hover over the points, it adds additional description. 
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
+- [x] **3rd party API placeholder** - I put a box in `entry.html` to indicate where the weather data will show up from a weather API. The weather will be used to affect the points received from each entry. 
+- [x] **Images** - I added an image of nature to the front page to set the theme of the application. Then, I added an image in the weather data box to represent what the weather might look like. 
 - [x] **Login placeholder** - I added a input tag for the password and email of the user, which will allow them to log into the webpage.
 - [x] **DB data placeholder** - The `entry.html` pages shows the users streak and points, which will be stored in the database. Also, the `leaderboard.html` will show the streak and points from other users, which will be also drawn from the database. 
 - [x] **WebSocket placeholder** - As soon as an entry is added that changes the points of a user and thus changes the ranking, the leaderboard will change on all users devices. This is shown on the `leaderboard.html` page. 
