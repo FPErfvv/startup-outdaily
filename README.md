@@ -1,7 +1,9 @@
 # Nature Tracker
 
 [My Notes](notes.md)
+
 Startup Description
+
 The Nature Tracker is a creative and innovative application that is used to encourage people to spend more time in nature. It allows users to log outdoor activities and keeps track of their streak for how many days in a row they spent outside.
 
 
