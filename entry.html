@@ -34,16 +34,37 @@
                         <input type="date" id="entryDate" name="entryDate" required/>
                     </div>
                     <div>
-                        <label for="entryDuration">Entry Duration</label>
+                        <label for="entryDuration">Entry Duration (minutes)</label>
                         <input type="number" id="entryDuration" name="entryDuration" min="1" required />
+                    </div>
+                    <div>
+                        <label for="location">Entry location </label>
+                        <input type="text" id="location" name="location" placeholder="Location"/>
                     </div>
                     <div>
                         <label for="entryDescription">Entry Description (optional)</label>
                         <textarea id="entryDescription" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?"></textarea>
                     </div>
+
                 </form>
                 <br/>
                 <button type="submit">Submit Entry</button>
+            </fieldset>
+        </section>
+        <section>
+            <fieldset>
+                <legend><h5>Current Weather Data</h5></legend>
+                <ul>
+                    <li>
+                        Temperature: 75 degrees
+                    </li>
+                    <li>
+                        Chance of rain: 30%
+                    </li>
+                    <li>
+                        Humidity: 10%
+                    </li>
+                </ul>
             </fieldset>
         </section>
     </main>
