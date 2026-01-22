@@ -20,17 +20,19 @@ No problems worked just like it said in the [instruction](https://github.com/web
 
 ## HTML
 
-Here is the link to the codepen page that I forked for the structure assignment: [codepen](https://codepen.io/FPErfvv/pen/GgqryBr)
+Here is the link to the codepen page that I forked for the structure assignment: [structure](https://codepen.io/FPErfvv/pen/GgqryBr)
 Here is the link to the codepen page that I forked for the input html practice:
-[codepen](https://codepen.io/FPErfvv/pen/myERXYG)
-Here is the link to the codepen page for the media practice: [codepen](https://codepen.io/FPErfvv/pen/zxBNRgN)
+[input](https://codepen.io/FPErfvv/pen/myERXYG)
+Here is the link to the codepen page for the media practice: [media](https://codepen.io/FPErfvv/pen/zxBNRgN)
 
 When copying the files over, I accidentally ran the script from the wrong directory (where my pem file was held). This caused it to copy everything from that directory over, which I didn't want, so I have to make sure to run it inside the simon-html so it only copies content there.
 
 
 ## CSS
 
-Here is my codepen for the basic CSS practice: [codepen](https://codepen.io/FPErfvv/pen/yyJXvJv)
+Here is my codepen for the basic CSS practice: [css](https://codepen.io/FPErfvv/pen/yyJXvJv)
+
+Here is my codepen for the Declarations CSS practice: [Declarations](https://codepen.io/FPErfvv/pen/XJKgZMy)
 
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
 
