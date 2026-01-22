@@ -30,6 +30,8 @@ When copying the files over, I accidentally ran the script from the wrong direct
 
 ## CSS
 
+Here is my codepen for the basic CSS practice: [codepen](https://codepen.io/FPErfvv/pen/yyJXvJv)
+
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
 
 Bootstrap seems a bit like magic. It styles things nicely, but is very opinionated. You either do, or you do not. There doesn't seem to be much in between.
