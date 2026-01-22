@@ -34,6 +34,8 @@ Here is my codepen for the basic CSS practice: [css](https://codepen.io/FPErfvv/
 
 Here is my codepen for the Declarations CSS practice: [Declarations](https://codepen.io/FPErfvv/pen/XJKgZMy)
 
+Here is my codepen for the animation/styling practice: [animation](https://codepen.io/FPErfvv/pen/emzRwXJ)
+
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
 
 Bootstrap seems a bit like magic. It styles things nicely, but is very opinionated. You either do, or you do not. There doesn't seem to be much in between.
