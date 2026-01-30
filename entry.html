@@ -29,17 +29,19 @@
     <main class="container-fluid px-0 flex-grow-1 flex-shrink-1">
         <div class="d-flex flex-column flex-md-row align-items-stretch flex-grow-1 flex-shrink-1 overflow-hidden">
             <div class="flex-fill col-md-8 ps-5 overflow-auto">
-                
-                <h2>Welcome BestHiker26</h2>
-                <h3>Streak: 9 days</h3>
-                <h4>Points: <span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">120 (hover for more info)</span></h4> 
+                <h2 class="text-center my-3">Welcome: BestHiker26</h2>
+                <div class="text-center">
+                    <p class="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2">Streak: 9 days</p>
+                    <p class="d-inline m-2 fs-5 bg-success bg-opacity-25 1 p-2 rounded-2">Points: <span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">120 (hover for more info)</span></p> 
+                </div>
+
                 <section> 
-                    <fieldset>
-                        <legend>New Entry</legend>
+                    <fieldset class="border border-2 mt-5 me-5 shadow">
+                        <legend class="text-center bg-success bg-opacity-50">New Entry</legend>
                         <form method="post" class="px-4 py-3">
                             <div class="mb-3">
                                 <label for="entryTitle" class="form-label">Entry Title</label>
-                                <input type="text" id="entryTitle" name="entryTitle" placeholder="Title" required/>
+                                <input type="text" class="form-control" id="entryTitle" name="entryTitle" placeholder="Title" required/>
                             </div >
                             <div class="mb-3">
                                 <label for="entryDate" class="form-label">Entry Date</label>
@@ -57,8 +59,10 @@
                                 <label for="entryDescription" class="form-label">Entry Description (optional)</label>
                                 <textarea id="entryDescription" class="form-control" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?"></textarea>
                             </div>
-                            <br/>
-                            <button type="submit">Submit Entry</button>
+                            
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-success">Submit Entry</button>
+                            </div>
                         </form>
                         
                     </fieldset>
