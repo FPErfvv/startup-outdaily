@@ -6,3 +6,10 @@
     color: rgb(255, 221, 0);
     font-weight: bold;
 }
+
+@font-face {
+    font-family: 'Lemon Regular';
+    src: url('../fonts/Lemon-Regular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
