@@ -6,3 +6,32 @@
     color: rgb(255, 221, 0);
     font-weight: bold;
 }
+
+.vertical-carousel {
+    height: 800px; /* or 80vh */
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    background-color: rgb(25, 135, 84);
+    padding: .2em;
+    border: .25em black solid;
+}
+
+.vertical-carousel-slide {
+    height: 50%;
+    min-height: 400px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.vertical-carousel-slide img {
+    width: 98%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: .25em black solid;
+    border-radius: 5%;
+    margin-top: .25em;
+    margin-left: .5em;
+}
