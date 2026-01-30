@@ -26,57 +26,64 @@
                 </div>
             </div>
         </header>
-    <main>
-        <h2>Welcome BestHiker26</h2>
-        <h3>Streak: 9 days</h3>
-        <h4>Points: <span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">120 (hover for more info)</span></h4> 
-        <section> 
-            <fieldset>
-                <legend>New Entry </legend>
-                <form method="post">
-                    <div>
-                        <label for="entryTitle">Entry Title</label>
-                        <input type="text" id="entryTitle" name="entryTitle" placeholder="Title" required/>
-                    </div>
-                    <div>
-                        <label for="entryDate">Entry Date</label>
-                        <input type="date" id="entryDate" name="entryDate" required/>
-                    </div>
-                    <div>
-                        <label for="entryDuration">Entry Duration (minutes)</label>
-                        <input type="number" id="entryDuration" name="entryDuration" min="1" required />
-                    </div>
-                    <div>
-                        <label for="location">Entry location </label>
-                        <input type="text" id="location" name="location" placeholder="Location"/>
-                    </div>
-                    <div>
-                        <label for="entryDescription">Entry Description (optional)</label>
-                        <textarea id="entryDescription" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?"></textarea>
-                    </div>
-                    <br/>
-                    <button type="submit">Submit Entry</button>
-                </form>
+    <main class="container-fluid px-0">
+        <div class="d-flex flex-column flex-md-row align-items-stretch">
+            <div class="flex-fill col-md-8 ps-5">
                 
-            </fieldset>
-        </section>
-        <section>
-            <fieldset>
-                <legend>Current Weather Data</legend>
-                <img src="images/weatherpic.jpeg" alt="Representation of what the current day would look like" width="600px" align="right"/>
-                <ul>
-                    <li>
-                        Temperature: 75 degrees
-                    </li>
-                    <li>
-                        Chance of rain: 30%
-                    </li>
-                    <li>
-                        Humidity: 60%
-                    </li>
-                </ul>
-            </fieldset>
-        </section>
+                <h2>Welcome BestHiker26</h2>
+                <h3>Streak: 9 days</h3>
+                <h4>Points: <span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">120 (hover for more info)</span></h4> 
+                <section> 
+                    <fieldset>
+                        <legend>New Entry </legend>
+                        <form method="post" class="px-4 py-3">
+                            <div class="mb-3">
+                                <label for="entryTitle" class="form-label">Entry Title</label>
+                                <input type="text" id="entryTitle" name="entryTitle" placeholder="Title" required/>
+                            </div >
+                            <div class="mb-3">
+                                <label for="entryDate" class="form-label">Entry Date</label>
+                                <input type="date" class="form-control" id="entryDate" name="entryDate" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="entryDuration" class="form-label">Entry Duration (minutes)</label>
+                                <input type="number" class="form-control" id="entryDuration" name="entryDuration" min="1" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="location" class="form-label">Entry location </label>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="Location"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="entryDescription" class="form-label">Entry Description (optional)</label>
+                                <textarea id="entryDescription" class="form-control" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?"></textarea>
+                            </div>
+                            <br/>
+                            <button type="submit">Submit Entry</button>
+                        </form>
+                        
+                    </fieldset>
+                </section>
+                <section>
+                    <fieldset>
+                        <legend>Current Weather Data</legend>
+                        <ul>
+                            <li>
+                                Temperature: 75 degrees
+                            </li>
+                            <li>
+                                Chance of rain: 30%
+                            </li>
+                            <li>
+                                Humidity: 60%
+                            </li>
+                        </ul>
+                    </fieldset>
+                </section>
+            </div>
+            <div class="flex-fill">
+                <img src="images/weatherpic.jpeg" alt="Representation of what the current day would look like" class="img-fluid"/>
+            </div>
+        </div>
     </main>
     </body>
     <footer class="bg-dark">
