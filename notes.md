@@ -38,6 +38,9 @@ Here is my codepen for the animation/styling practice: [animation](https://codep
 
 Here is my codepen for the bootstrap practice: [bootstrap](https://codepen.io/FPErfvv/pen/emzewzr)
 
+The key thing that I learned with CSS was in order to learn how to style a page, you have to practice and play around with all of the different elements. Whether it me using a CSS or stylesheet, or a framework, you just have to
+play around to figure out what to use when, and which specific names and codes do what. 
+
 
 ## React Part 1: Routing
 
