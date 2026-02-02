@@ -15,8 +15,9 @@
     scroll-snap-type: y mandatory;
     -webkit-overflow-scrolling: touch;
     background-color: rgb(25, 135, 84);
-    padding: .2em;
     border: .25em rgb(40, 40, 40) solid;
+    scrollbar-color: rgb(0, 81, 0) rgb(25, 135, 84);
+    padding: 0.2em;
 }
 
 .vertical-carousel-slide {
@@ -35,6 +36,7 @@
     border-radius: 5%;
     margin-top: .2em;
     margin-left: .5em;
+    
     box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -54,4 +56,8 @@ main .flex-fill.d-flex {
 
 .temp {
     font-size: 5em;
+}
+
+.points:hover {
+    background-color: rgb(25, 135, 84) !important;
 }
