@@ -82,12 +82,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Visually appealing colors and layout. No overflowing elements.** - I did not complete this part of the deliverable.
-- [ ] **Use of a CSS framework** - I did not complete this part of the deliverable.
-- [ ] **All visual elements styled using CSS** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing using flexbox and/or grid display** - I did not complete this part of the deliverable.
-- [ ] **Use of a imported font** - I did not complete this part of the deliverable.
-- [ ] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
+- [x] **Visually appealing colors and layout. No overflowing elements.** - I added a constant theme (the bootstrap success color) with different variations of opacities. This, along with the nature image scroll wheel gives a very nature-like theme. Also, shadowing was added to add depth to the page.  
+- [x] **Use of a CSS framework** - Most of the styling was done via bootstrap. This was to ensure that styling was consistent. Occasionally, I had to use the CSS style sheets to provide more custom styling, but most was able to be done with bootstrap. 
+- [x] **All visual elements styled using CSS** - Everything was either styled with bootstrap or a CSS stylesheet. 
+- [x] **Responsive to window resizing using flexbox and/or grid display** - Each page has something that implements the flexbox styling. This allows for the page to adjust when put in a different orientation, so that when changing between a computer screen and a phone it can adjust accordingly. 
+- [x] **Use of a imported font** - I used an imported font to stylize the logo at the top left of the page. This flowing font fits well with the nature logo that is used on the site. 
+- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - All of the aforementioned selectors were used in the CSS style sheets. The elements are used in the `entry.css` to stylize the main flex container and it's children. The class selector was used to create the carousel slides in the `entry.css` and on all pages to allow reactive styling to the navigator bar. The ID selector and hover pseudo selector was used on the `entry.css` page to show reactivity when hovering over the points indicator. This is to indicate that something will happen, which will prompt the user to hover over it to see the additional information. 
 
 ## 🚀 React part 1: Routing deliverable
 

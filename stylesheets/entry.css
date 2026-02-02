@@ -7,7 +7,7 @@
     font-weight: bold;
 }
 
-.vertical-carousel {
+#vertical-carousel {
     height: 100%; /* or 80vh */
     max-height: 110vh;
     overflow-y: auto;
@@ -58,6 +58,6 @@ main .flex-fill.d-flex {
     font-size: 5em;
 }
 
-.points:hover {
+#points:hover {
     background-color: rgb(25, 135, 84) !important;
 }
