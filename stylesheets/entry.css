@@ -1,12 +1,3 @@
-.nav-link {
-    color: white
-}
-
-.nav-link.active {
-    color: rgb(255, 221, 0);
-    font-weight: bold;
-}
-
 #vertical-carousel {
     height: 100%; /* or 80vh */
     max-height: 110vh;
@@ -45,13 +36,6 @@ main > .d-flex,
 main .overflow-auto,
 main .flex-fill.d-flex {
     min-height: 0;
-}
-
-@font-face {
-    font-family: 'Lemon Regular';
-    src: url('../fonts/Lemon-Regular.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
 }
 
 .temp {
