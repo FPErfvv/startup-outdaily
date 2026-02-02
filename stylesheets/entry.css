@@ -51,3 +51,7 @@ main .flex-fill.d-flex {
     font-weight: bold;
     font-style: normal;
 }
+
+.temp {
+    font-size: 5em;
+}

@@ -19,8 +19,8 @@
                     </a>
                     
                     <ul class="nav col-md-6 mb-0 justify-content-left px-3 ms-5">
-                        <li class="nav-item"><a href="index.html" class="nav-link px-3 mt-2 active">Home</a></li>
-                        <li class="nav-item"><a href="entry.html" class="nav-link px-3 mt-2">Entry Page</a></li>
+                        <li class="nav-item"><a href="index.html" class="nav-link px-3 mt-2 ">Home</a></li>
+                        <li class="nav-item"><a href="entry.html" class="nav-link px-3 mt-2 active">Entry Page</a></li>
                         <li class="nav-item"><a href="leaderboard.html" class="nav-link px-3 mt-2">Leaderboard</a></li>
                     </ul>
                 </div>
@@ -68,19 +68,25 @@
                         </fieldset>
                     </section>
                     <section>
-                        <fieldset>
-                            <legend>Current Weather Data</legend>
-                            <ul>
-                                <li>
-                                    Temperature: 75 degrees
-                                </li>
-                                <li>
-                                    Chance of rain: 30%
-                                </li>
-                                <li>
-                                    Humidity: 60%
-                                </li>
-                            </ul>
+                        <fieldset class="border border-2 my-5 me-5 shadow">
+                            <legend class="text-center bg-primary bg-opacity-50">Current Weather</legend>
+                            <div class="d-flex mb-2">
+                                <img src="images/weather/few.png" alt="Representation of what the current day would look like" class="flex-column flex-fill ms-2 rounded-2"/>
+                                <div class="flex-column flex-fill">
+                                    <div class="temp ms-4">
+                                        75 <span>&#176;</span>
+                                    </div>
+                                    <div class="ms-4 display-6 my-2">
+                                        Sunny
+                                    </div>
+                                    <div class="ms-4">
+                                        Chance of rain: 30%
+                                    </div>
+                                    <div class="ms-4">
+                                        Humidity: 60%
+                                    </div>
+                                </div>
+                            </div>
                         </fieldset>
                     </section>
                 </div>
