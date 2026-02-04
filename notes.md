@@ -48,6 +48,8 @@ I was playing around with react and was able to edit the default vite practice p
 ![Image](images/vitepractice.png)
 Here is the codepen to practice playing around with React: [react](https://codepen.io/FPErfvv/pen/ogLMxvr)
 
+Here is the codepen to practice playing around with routers: [routers](https://codepen.io/FPErfvv/pen/ogLMxNr)
+
 ## React Part 2: Reactivity
 
 This was a lot of fun to see it all come together. I had to keep remembering to use React state instead of just manipulating the DOM directly.
