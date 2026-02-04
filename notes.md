@@ -44,7 +44,9 @@ play around to figure out what to use when, and which specific names and codes d
 
 ## React Part 1: Routing
 
-Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
+I was playing around with react and was able to edit the default vite practice project:
+![Image](images/vitepractice.png)
+Here is the codepen to practice playing around with React: [react](https://codepen.io/FPErfvv/pen/ogLMxvr)
 
 ## React Part 2: Reactivity
 
