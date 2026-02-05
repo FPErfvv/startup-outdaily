@@ -19,14 +19,19 @@ export default function App() {
                         </a>
                         
                         <ul className="nav mb-0 justify-content-left px-3 flex-shrink-0">
-                            <li className="nav-item"><a href="index.html" className="nav-link px-3 mt-2 active">Home</a></li>
-                            <li className="nav-item"><a href="entry.html" className="nav-link px-3 mt-2">Entry Page</a></li>
-                            <li className="nav-item"><a href="leaderboard.html" className="nav-link px-3 mt-2">Leaderboard</a></li>
+                            <li className="nav-item"><NavLink to="" className="nav-link px-3 mt-2 active">Home</NavLink></li>
+                            <li className="nav-item"><NavLink to="entry" className="nav-link px-3 mt-2">Entry Page</NavLink></li>
+                            <li className="nav-item"><NavLink to="leaderboard" className="nav-link px-3 mt-2">Leaderboard</NavLink></li>
                         </ul>
                     </div>
                 </div>
             </header>
-            <Entry/>
+            <Routes>
+                <Route path='/' element={<Login />} exact />
+                <Route path='/entry' element={<Entry />} />
+                <Route path='/leaderboard' element={<Leaderboard />} />
+                <Route path='*' element={<NotFound />} />
+            </Routes>
             <footer className="bg-dark">
                 <div className="container d-flex py-2">
                     <div className="text-light align-self-start flex-grow-0">Author: Fred Probst</div>
@@ -41,4 +46,8 @@ export default function App() {
             </div>
         </BrowserRouter>
     );
+}
+
+function NotFound() {
+    return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
