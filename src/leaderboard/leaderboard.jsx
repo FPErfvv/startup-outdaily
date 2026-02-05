@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Leaderboard() {
   return (
-<main className="container py-4 flex-grow-1 flex-shrink-1">
+        <main className="container py-4 flex-grow-1 flex-shrink-1">
             <fieldset>
                 <legend className="text-decoration-underline display-6">Leaderboard</legend>
                 <div className="bg-danger bg-opacity-25 border rounded-3 px-3 pt-3 mb-3">
