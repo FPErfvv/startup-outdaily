@@ -50,6 +50,8 @@ Here is the codepen to practice playing around with React: [react](https://codep
 
 Here is the codepen to practice playing around with routers: [routers](https://codepen.io/FPErfvv/pen/ogLMxNr)
 
+I found that by following the instructions on canvas, everything went quite smoothly. I didn't have any trouble with simon or with doing the same with my own application. Once I had figured out how simon worked, I was able to easily transfer that to do my own application quite quickly. One think I had to be careful of was that at times there were html tags that I didn't put the closing `/` on, which didn't cause any trouble with my html but threw errors in the jsx. But, it was an easy fix and everything worked smoothly after that. 
+
 ## React Part 2: Reactivity
 
 This was a lot of fun to see it all come together. I had to keep remembering to use React state instead of just manipulating the DOM directly.
