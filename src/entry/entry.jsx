@@ -1,9 +1,103 @@
 import React from 'react';
+import "./entry.css"
 
 export function Entry() {
   return (
-    <main className="container-fluid bg-success text-center">
-      <div>entry displayed here</div>
-    </main>
+<main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
+            <div className="d-flex flex-column flex-md-row align-items-stretch flex-grow-1 flex-shrink-1 overflow-hidden">
+                <div className="flex-fill col-md-10 overflow-auto ps-5">
+                    <h2 className="text-center my-3">Welcome: BestHiker26</h2>
+                    <div className="text-center">
+                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2">Streak: 9 days</p>
+                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2" id="points"><span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">Points: 120</span></p> 
+                    </div>
+
+                    <section> 
+                        <fieldset className="border border-2 mt-5 me-5 shadow">
+                            <legend className="text-center bg-success bg-opacity-50">New Entry</legend>
+                            <form method="post" className="px-4 py-3">
+                                <div className="mb-3">
+                                    <label for="entryTitle" className="form-label">Entry Title</label>
+                                    <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" required/>
+                                </div>
+                                <div className="mb-3">
+                                    <label for="entryDate" className="form-label">Entry Date</label>
+                                    <input type="date" className="form-control" id="entryDate" name="entryDate" required/>
+                                </div>
+                                <div className="mb-3">
+                                    <label for="entryDuration" className="form-label">Entry Duration (minutes)</label>
+                                    <input type="number" className="form-control" id="entryDuration" name="entryDuration" min="1" required />
+                                </div>
+                                <div className="mb-3">
+                                    <label for="location" className="form-label">Entry location </label>
+                                    <input type="text" className="form-control" id="location" name="location" placeholder="Location"/>
+                                </div>
+                                <div className="mb-3">
+                                    <label for="entryDescription" className="form-label">Entry Description (optional)</label>
+                                    <textarea id="entryDescription" className="form-control" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?"></textarea>
+                                </div>
+                                
+                                <div className="d-flex justify-content-center">
+                                    <button type="submit" className="btn btn-success">Submit Entry</button>
+                                </div>
+                            </form>
+                        </fieldset>
+                    </section>
+                    <section>
+                        <fieldset className="border border-2 my-5 me-5 shadow">
+                            <legend className="text-center bg-primary bg-opacity-50">Current Weather</legend>
+                            <div className="d-flex mb-2">
+                                <img src="images/weather/few.png" alt="Representation of what the current day would look like" className="flex-column flex-fill ms-2 rounded-2"/>
+                                <div className="flex-column flex-fill">
+                                    <div className="temp ms-4">
+                                        75 <span>&#176;</span>
+                                    </div>
+                                    <div className="ms-4 display-6 my-2">
+                                        Sunny
+                                    </div>
+                                    <div className="ms-4">
+                                        Chance of rain: 5%
+                                    </div>
+                                    <div className="ms-4">
+                                        Humidity: 60%
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </section>
+                </div>
+                <div className="flex-fill d-flex ">
+                    <div className="h-100 flex-grow-0" id="vertical-carousel">
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/weatherpic.jpeg" alt="Picture overlooking the foliage of a green forest"/>
+                        </div>
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/beach.webp" alt="Picture overlooking a beach"/>
+                        </div>
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/wheattree.webp" alt="Picture looking at a field of yellow wheat with a tree in the middle"/>
+                        </div>
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/mountains.jpg" alt="Picture with a forest with mountains in the background"/>
+                        </div>
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/waterfall.png" alt="Picture of a waterfall"/>
+                        </div>
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/image1.jpg" alt="Picture of a pond with a forested mountain in the background"/>
+                        </div>
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/image2.jpg" alt="Picture of a leaf touching water"/>
+                        </div>
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/image3.jpg" alt="Picture of the sun setting on the beach"/>
+                        </div>
+                        <div className="vertical-carousel-slide">
+                            <img src="images/carousel/image4.jpg" alt="Picture of a rainbow crossing the horizon over the ocean"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
   );
 }
