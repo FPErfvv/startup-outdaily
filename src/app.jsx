@@ -1,9 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Entry } from './entry/entry';
+import { Leaderboard } from './leaderboard/leaderboard';
 
 export default function App() {
   return (
+    <BrowserRouter>
         <div className="app bg-success bg-opacity-10 d-flex flex-column min-vh-100">
             <header className="bg-success border-bottom border-1 border-dark">
                 <div className="container">
@@ -21,9 +26,7 @@ export default function App() {
                     </div>
                 </div>
             </header>
-            <main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
-            Here is the main
-            </main>
+            <Entry/>
             <footer className="bg-dark">
                 <div className="container d-flex py-2">
                     <div className="text-light align-self-start flex-grow-0">Author: Fred Probst</div>
@@ -35,5 +38,7 @@ export default function App() {
                 </div>
             </footer> 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            </div>);
+            </div>
+        </BrowserRouter>
+    );
 }
