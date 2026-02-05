@@ -9,14 +9,14 @@ import { Leaderboard } from './leaderboard/leaderboard';
 export default function App() {
   return (
     <BrowserRouter>
-        <div className="app bg-success bg-opacity-10 d-flex flex-column min-vh-100">
+        <div className="bg-success bg-opacity-10 d-flex flex-column min-vh-100">
             <header className="bg-success border-bottom border-1 border-dark">
                 <div className="container">
                     <div className="d-flex flex-wrap align-items-center justify-content-left py-3 flex-shrink-0">   
-                        <a href="index.html" className="d-flex align-items-center text-white text-decoration-none me-3">
+                        <NavLink to="" className="d-flex align-items-center text-white text-decoration-none me-3">
                             <img src="images/nature.png" alt="Outdaily Logo" height="60" className="me-2" />
                             <h1 className="mb-0" id="logo">Outdaily</h1>
-                        </a>
+                        </NavLink>
                         
                         <ul className="nav mb-0 justify-content-left px-3 flex-shrink-0">
                             <li className="nav-item"><NavLink to="" className="nav-link px-3 mt-2 active">Home</NavLink></li>
