@@ -93,9 +93,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - Everything when smoothly with this part of the project. I ran the command to set up my project with vite and edited the script node in the package.json. 
+- [x] **Components** - I have four components in this application. Three for the three pages (`entry.jsx `, `login.jsx`, and `leaderboard.jsx`). Finally there, there is an additional component to show when no pages is found. 
+- [x] **Router** - The router is set up to allow for the pages to be accessed smoothly without error, and if a page that is requested is not found, it routes it to the NotFound component. 
 
 ## 🚀 React part 2: Reactivity deliverable
 
