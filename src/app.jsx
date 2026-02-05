@@ -19,7 +19,7 @@ export default function App() {
                         </NavLink>
                         
                         <ul className="nav mb-0 justify-content-left px-3 flex-shrink-0">
-                            <li className="nav-item"><NavLink to="" className="nav-link px-3 mt-2 active">Home</NavLink></li>
+                            <li className="nav-item"><NavLink to="" className="nav-link px-3 mt-2">Home</NavLink></li>
                             <li className="nav-item"><NavLink to="entry" className="nav-link px-3 mt-2">Entry Page</NavLink></li>
                             <li className="nav-item"><NavLink to="leaderboard" className="nav-link px-3 mt-2">Leaderboard</NavLink></li>
                         </ul>
