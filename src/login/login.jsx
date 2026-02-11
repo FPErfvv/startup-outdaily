@@ -8,12 +8,12 @@ export function Login() {
                     <h3 className="py-4 text-center bg-success bg-opacity-50 rounded-top-5 border border-3">Start tracking every experience with nature.</h3>
                     <form className="px-4 py-3" action="entry.html">
                         <div className="mb-3">
-                        <label for="exampleDropdownFormEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" />
+                            <label htmlFor="exampleDropdownFormEmail1" className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" />
                         </div>
                         <div className="mb-3">
-                        <label for="exampleDropdownFormPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleDropdownFormPassword1" placeholder="Password" />
+                            <label htmlFor="exampleDropdownFormPassword1" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="exampleDropdownFormPassword1" placeholder="Password" />
                         </div>
                         <div className="mb-3">
                         <div className="form-check">

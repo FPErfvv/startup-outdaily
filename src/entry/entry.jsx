@@ -2,8 +2,24 @@ import React from 'react';
 import "./entry.css"
 
 export function Entry() {
+    const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
+    const [weatherImageUrl, setWeatherImageUrl] = React.useState("Loading...");
+    const weatherState = {
+        "sunny": "images/weather/few.png",
+        "scattered": "images/weather/scattered",
+        "cloudy": "images/weather/bkn.png",
+        "nightCloudy": "images/weather/nbkn.png",
+        "nightClear": "images/weather/nfew.png",
+        "nightScattered": "images/weather/nsct.png"
+    }
+    React.useEffect(() => {
+        setWeatherInfo([75,"sunny",5,40]);
+    },[])
+    React.useEffect(() => {
+        setWeatherImageUrl(weatherState[weatherInfo[1]]);
+    },[weatherInfo])
   return (
-<main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
+        <main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
             <div className="d-flex flex-column flex-md-row align-items-stretch flex-grow-1 flex-shrink-1 overflow-hidden">
                 <div className="flex-fill col-md-10 overflow-auto ps-5">
                     <h2 className="text-center my-3">Welcome: BestHiker26</h2>
@@ -17,23 +33,23 @@ export function Entry() {
                             <legend className="text-center bg-success bg-opacity-50">New Entry</legend>
                             <form method="post" className="px-4 py-3">
                                 <div className="mb-3">
-                                    <label for="entryTitle" className="form-label">Entry Title</label>
+                                    <label htmlFor="entryTitle" className="form-label">Entry Title</label>
                                     <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" required/>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="entryDate" className="form-label">Entry Date</label>
+                                    <label htmlFor="entryDate" className="form-label">Entry Date</label>
                                     <input type="date" className="form-control" id="entryDate" name="entryDate" required/>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="entryDuration" className="form-label">Entry Duration (minutes)</label>
+                                    <label htmlFor="entryDuration" className="form-label">Entry Duration (minutes)</label>
                                     <input type="number" className="form-control" id="entryDuration" name="entryDuration" min="1" required />
                                 </div>
                                 <div className="mb-3">
-                                    <label for="location" className="form-label">Entry location </label>
+                                    <label htmlFor="location" className="form-label">Entry location </label>
                                     <input type="text" className="form-control" id="location" name="location" placeholder="Location"/>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="entryDescription" className="form-label">Entry Description (optional)</label>
+                                    <label htmlFor="entryDescription" className="form-label">Entry Description (optional)</label>
                                     <textarea id="entryDescription" className="form-control" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?"></textarea>
                                 </div>
                                 
@@ -47,19 +63,19 @@ export function Entry() {
                         <fieldset className="border border-2 my-5 me-5 shadow">
                             <legend className="text-center bg-primary bg-opacity-50">Current Weather</legend>
                             <div className="d-flex mb-2">
-                                <img src="images/weather/few.png" alt="Representation of what the current day would look like" className="flex-column flex-fill ms-2 rounded-2"/>
+                                <img src={weatherImageUrl} alt="Representation of what the current day would look like" className="flex-column flex-fill ms-2 rounded-2"/>
                                 <div className="flex-column flex-fill">
                                     <div className="temp ms-4">
-                                        75 <span>&#176;</span>
+                                        {weatherInfo[0]} <span>&#176;</span>
                                     </div>
                                     <div className="ms-4 display-6 my-2">
-                                        Sunny
+                                        {weatherInfo[1]}
                                     </div>
                                     <div className="ms-4">
-                                        Chance of rain: 5%
+                                        Chance of rain: {weatherInfo[2]}%
                                     </div>
                                     <div className="ms-4">
-                                        Humidity: 60%
+                                        Humidity: {weatherInfo[3]}%
                                     </div>
                                 </div>
                             </div>
