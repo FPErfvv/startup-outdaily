@@ -1,8 +1,8 @@
 import React from 'react';
-import { Unauthenticated } from './unauthenticated';
-import { Authenticated } from './authenticated';
-import { ForgotPassword } from './forgotPassword';
-import { Register } from './register';
+import { Unauthenticated } from './subpages/unauthenticated';
+import { Authenticated } from './subpages/authenticated';
+import { ForgotPassword } from './subpages/forgotPassword';
+import { Register } from './subpages/register';
 import { useUser } from '../UserContext';
 
 export function Login() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUser } from '../UserContext';
+import { useUser } from '../../UserContext';
 export function Authenticated() {
     const { currentPage, setCurrentPage, userName } = useUser();
 
