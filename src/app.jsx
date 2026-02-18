@@ -5,9 +5,11 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Entry } from './entry/entry';
 import { Leaderboard } from './leaderboard/leaderboard';
+import { UserProvider } from './UserContext';
 
 export default function App() {
   return (
+    <UserProvider>
     <BrowserRouter>
         <div className="bg-success bg-opacity-10 d-flex flex-column min-vh-100">
             <header className="bg-success border-bottom border-1 border-dark">
@@ -45,6 +47,7 @@ export default function App() {
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             </div>
         </BrowserRouter>
+        </UserProvider>
     );
 }
 

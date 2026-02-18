@@ -1,9 +1,13 @@
 import React from 'react';
 import "./entry.css"
-
+import { useUser } from '../UserContext';
+import { getStreak, getPoints } from '../service';
 export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
     const [weatherImageUrl, setWeatherImageUrl] = React.useState("Loading...");
+    const { userName } = useUser();
+    const [localStreak, setLocalStreak] = React.useState(0);
+    const [localPoints, setLocalPoints] = React.useState(0);
     const weatherState = {
         "sunny": "images/weather/few.png",
         "scattered": "images/weather/scattered",
@@ -18,14 +22,27 @@ export function Entry() {
     React.useEffect(() => {
         setWeatherImageUrl(weatherState[weatherInfo[1]]);
     },[weatherInfo])
+    React.useEffect(() => {
+        const streak = getStreak(userName);
+        setLocalStreak(streak);
+    },[userName])
+    React.useEffect(() => {
+        const points = getPoints(userName);
+        setLocalPoints(points);
+    },[userName])
+
+    function addpoints() {
+        updatePoints(userName, 10);
+        setLocalPoints(localPoints + 10);
+    }
   return (
         <main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
             <div className="d-flex flex-column flex-md-row align-items-stretch flex-grow-1 flex-shrink-1 overflow-hidden">
                 <div className="flex-fill col-md-10 overflow-auto ps-5">
-                    <h2 className="text-center my-3">Welcome: BestHiker26</h2>
+                    <h2 className="text-center my-3">Welcome: {userName}</h2>
                     <div className="text-center">
-                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2">Streak: 9 days</p>
-                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2" id="points"><span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">Points: 120</span></p> 
+                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2">Streak: {localStreak} days</p>
+                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2" id="points"><span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">Points: {localPoints}</span></p> 
                     </div>
 
                     <section> 
@@ -54,7 +71,7 @@ export function Entry() {
                                 </div>
                                 
                                 <div className="d-flex justify-content-center">
-                                    <button type="submit" className="btn btn-success">Submit Entry</button>
+                                    <button type="submit" className="btn btn-success" onClick={addpoints}>Submit Entry</button>
                                 </div>
                             </form>
                         </fieldset>

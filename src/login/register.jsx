@@ -1,25 +1,26 @@
 import React from 'react';
 import { handleRegister } from '../service';
 import { getUsername } from '../service';
-
-export function Register(props) {
-    function handlePageChange(page) {
-        props.onPageChange(page);
-    }
-
-    const [username, setUsername] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-
+import { useUser } from '../UserContext';
+import { Alert } from '../alert';
+export function Register() {
+    const { userName, setUserName } = useUser();
+    const { email, setEmail } = useUser();
+    const { password, setPassword } = useUser();
+    const { currentPage, setCurrentPage } = useUser();
+    const alert = <Alert/>;
     function handleSubmit(event) {
         event.preventDefault();
-        const result = handleRegister(username, email, password);
+        const result = handleRegister(userName, email, password);
         if (result.success) {
-            props.onPageChange('authenticated');
-            props.setUsername(username);
+            
+            setUserName(userName);
+            setEmail(email);
+            setPassword(password);
+            setCurrentPage('authenticated');
         } else {
             console.log(result.message);
-            props.alert.setAlertMessage(result.message);
+            //alert.setAlertMessage(result.message);
         }
     }
     return (
@@ -28,7 +29,7 @@ export function Register(props) {
             <form className="px-4 py-3" action="entry.html">
             <div className="mb-3">
                     <label htmlFor="exampleDropdownFormUsername1" className="form-label">Username</label>
-                    <input type="text" className="form-control" id="exampleDropdownFormUsername1" placeholder="Username" onChange={(e)=>(setUsername(e.target.value))} />
+                    <input type="text" className="form-control" id="exampleDropdownFormUsername1" placeholder="Username" onChange={(e)=>(setUserName(e.target.value))} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleDropdownFormEmail1" className="form-label">Email address</label>
@@ -53,7 +54,7 @@ export function Register(props) {
             </form>
             <div className="dropdown-divider border"></div>
             <div className="text-center my-1">
-                <a className="dropdown-item m-1 text-decoration-underline d-inline" onClick={() => handlePageChange('unauthenticated')}>Log In</a>
+                <a className="dropdown-item m-1 text-decoration-underline d-inline" onClick={() => setCurrentPage('unauthenticated')}>Log In</a>
             </div>
     
         </div>

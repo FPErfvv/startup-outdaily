@@ -2,24 +2,23 @@ import React from 'react';
 import { handleLogin } from '../service';
 import { getUsername } from '../service';
 import { Alert } from '../alert';
-
-export function Unauthenticated(props) {
-    function handlePageChange(page) {
-        props.onPageChange(page);
-    }
-
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-
+import { useUser } from '../UserContext';
+export function Unauthenticated() {
+    const { email, setEmail } = useUser();
+    const { password, setPassword } = useUser();
+    const { currentPage, setCurrentPage } = useUser();
+    const { userName, setUserName } = useUser();
+    const alert = <Alert/>;
     function handleSubmit(event) {
         event.preventDefault();
         const result = handleLogin(email, password);
         if (result.success) {
-            props.onPageChange('authenticated');
-            props.setUsername(getUsername(email));
+            
+            setUserName(getUsername(email));
+            setCurrentPage('authenticated');
         } else {
             console.log(result.message);
-            props.alert.setAlertMessage(result.message);
+            //alert.setAlertMessage(result.message);
         }
     }
     return (
@@ -49,10 +48,9 @@ export function Unauthenticated(props) {
             </form>
             <div className="dropdown-divider border"></div>
             <div className="text-center my-1">
-                <a className="dropdown-item m-1 text-decoration-underline d-inline" onClick={() => handlePageChange('register')}>Sign up</a>
-                <a className="dropdown-item m-1 text-decoration-underline d-inline" onClick={() => handlePageChange('forgotPassword')}>Forgot password?</a>
+                <a className="dropdown-item m-1 text-decoration-underline d-inline" onClick={() => setCurrentPage('register')}>Sign up</a>
+                <a className="dropdown-item m-1 text-decoration-underline d-inline" onClick={() => setCurrentPage('forgotPassword')}>Forgot password?</a>
             </div>
-
         </div>
   );
 }
