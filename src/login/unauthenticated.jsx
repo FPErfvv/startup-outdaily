@@ -1,6 +1,7 @@
 import React from 'react';
 import { handleLogin } from '../service';
 import { getUsername } from '../service';
+import { Alert } from '../alert';
 
 export function Unauthenticated(props) {
     function handlePageChange(page) {
@@ -16,9 +17,9 @@ export function Unauthenticated(props) {
         if (result.success) {
             props.onPageChange('authenticated');
             props.setUsername(getUsername(email));
-            console.log(getUsername(email));
         } else {
             console.log(result.message);
+            props.alert.setAlertMessage(result.message);
         }
     }
     return (

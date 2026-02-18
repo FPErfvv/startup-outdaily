@@ -19,6 +19,7 @@ export function Register(props) {
             props.setUsername(username);
         } else {
             console.log(result.message);
+            props.alert.setAlertMessage(result.message);
         }
     }
     return (

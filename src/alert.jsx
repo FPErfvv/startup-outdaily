@@ -2,21 +2,32 @@ import React from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 
-function Alert(props) {
-    const[alertMessage, setAlertMessage] = React.useState("");
+export function Alert(props) {
+    const [alertMessage, setMessage] = React.useState("");
 
-    function showAlert(message) {
-        setAlertMessage(message);
+    function onAlertHide() {
+        setMessage("");
     }
 
+    function setAlertMessage(message) {
+        setMessage(message);
+    }
+
+    
+
     return (
-        <div>
-            <ToastContainer position='top-end' className='p-3 bg-alert'>
+        <ToastContainer position='middle-center' className='p-3 bg-success border border-3' style={
+            { zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',}
+            }>
+            <Toast onClose={() => onAlertHide()}>
                 <Toast.Header>
                     <strong className="me-auto">Alert</strong>
                 </Toast.Header>
                 <Toast.Body>{alertMessage}</Toast.Body>
-            </ToastContainer>
-        </div>
+            </Toast>
+        </ToastContainer>
     );
 }
