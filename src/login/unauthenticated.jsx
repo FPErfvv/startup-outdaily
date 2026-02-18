@@ -24,7 +24,7 @@ export function Unauthenticated() {
     return (
         <div className="bd-example border border-3 rounded-top-5 flex-fill flex-column m-3 col-md-10 shadow">
             <h3 className="py-4 text-center bg-success bg-opacity-50 rounded-top-5 border border-3">Start tracking every experience with nature.</h3>
-            <form className="px-4 py-3" action="entry.html">
+            <form className="px-4 py-3">
                 <div className="mb-3">
                     <label htmlFor="exampleDropdownFormEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" onChange={(e)=>(setEmail(e.target.value))} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./entry.css"
 import { useUser } from '../UserContext';
-import { getStreak, getPoints } from '../service';
+import { getStreak, getPoints, updatePoints } from '../service';
 export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
     const [weatherImageUrl, setWeatherImageUrl] = React.useState("Loading...");
@@ -48,7 +48,7 @@ export function Entry() {
                     <section> 
                         <fieldset className="border border-2 mt-5 me-5 shadow">
                             <legend className="text-center bg-success bg-opacity-50">New Entry</legend>
-                            <form method="post" className="px-4 py-3">
+                            <form className="px-4 py-3">
                                 <div className="mb-3">
                                     <label htmlFor="entryTitle" className="form-label">Entry Title</label>
                                     <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" required/>
