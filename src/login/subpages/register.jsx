@@ -1,14 +1,12 @@
 import React from 'react';
 import { handleRegister } from '../../service';
-import { getUsername } from '../../service';
 import { useUser } from '../../UserContext';
-import { Alert } from '../../alert';
 export function Register() {
     const { userName, setUserName } = useUser();
     const { email, setEmail } = useUser();
     const { password, setPassword } = useUser();
-    const { currentPage, setCurrentPage } = useUser();
-    const alert = <Alert/>;
+    const { setCurrentPage } = useUser();
+    const { setAlertMessage } = useUser();
     function handleSubmit(event) {
         event.preventDefault();
         const result = handleRegister(userName, email, password);
@@ -20,7 +18,7 @@ export function Register() {
             setCurrentPage('authenticated');
         } else {
             console.log(result.message);
-            //alert.setAlertMessage(result.message);
+            setAlertMessage(result.message);
         }
     }
     return (

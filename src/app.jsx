@@ -6,10 +6,9 @@ import { Login } from './login/login';
 import { Entry } from './entry/entry';
 import { Leaderboard } from './leaderboard/leaderboard';
 import { UserProvider, useUser } from './UserContext';
-
+import { Alert } from './alert';
 
 export default function App() {
-    
   return (
     <UserProvider>
         <BrowserRouter>
@@ -24,6 +23,14 @@ function NotFound() {
 }
 
 function AppContent() {
+    const { alertMessage, setAlertMessage } = useUser();
+    React.useEffect(() => {
+        if (alertMessage) {
+            setTimeout(() => {
+                setAlertMessage('');
+            }, 10000);
+        }
+    }, [alertMessage]);
     return (<div className="bg-success bg-opacity-10 d-flex flex-column min-vh-100">
         <header className="bg-success border-bottom border-1 border-dark">
             <div className="container">
@@ -56,6 +63,7 @@ function AppContent() {
             <Route path='/leaderboard' element={<Leaderboard />} />
             <Route path='*' element={<NotFound />} />
         </Routes>
+        {alertMessage && <Alert />}
         <footer className="bg-dark">
             <div className="container d-flex py-2">
                 <div className="text-light align-self-start flex-grow-0">Author: Fred Probst</div>

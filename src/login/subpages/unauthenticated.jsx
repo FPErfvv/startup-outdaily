@@ -1,7 +1,6 @@
 import React from 'react';
 import { handleLogin } from '../../service';
 import { getUsername } from '../../service';
-import { Alert } from '../../alert';
 import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +9,7 @@ export function Unauthenticated() {
     const { password, setPassword } = useUser();
     const { currentPage, setCurrentPage } = useUser();
     const { userName, setUserName } = useUser();
-    const alert = <Alert/>;
+    const { alertMessage, setAlertMessage } = useUser();
     const navigate = useNavigate();
     function handleSubmit(event) {
         event.preventDefault();
@@ -22,7 +21,7 @@ export function Unauthenticated() {
             navigate('/entry');
         } else {
             console.log(result.message);
-            //alert.setAlertMessage(result.message);
+            setAlertMessage(result.message);
         }
     }
     return (

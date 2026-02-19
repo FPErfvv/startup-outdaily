@@ -8,6 +8,7 @@ export function UserProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [currentPage, setCurrentPage] = useState('unauthenticated');
+  const [alertMessage, setAlertMessage] = useState('');
 
   const value = {
     userName,
@@ -18,6 +19,8 @@ export function UserProvider({ children }) {
     setPassword,
     currentPage,
     setCurrentPage,
+    alertMessage,
+    setAlertMessage,
   };
 
   return (
