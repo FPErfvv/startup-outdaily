@@ -12,7 +12,7 @@ export function Entry() {
     const [localPoints, setLocalPoints] = React.useState(0);
     const weatherState = {
         "sunny": "images/weather/few.png",
-        "scattered": "images/weather/scattered",
+        "scattered": "images/weather/sct.png",
         "cloudy": "images/weather/bkn.png",
         "nightCloudy": "images/weather/nbkn.png",
         "nightClear": "images/weather/nfew.png",
@@ -69,12 +69,12 @@ export function Entry() {
             "temp": 25,
             "cloudConditions": 50,
             "chanceOfRain": 50,
-            "humidity": 50
+            "humidity": 20
         },
         "Salt Lake City": {
             "temp": 20,
-            "cloudConditions": 50,
-            "chanceOfRain": 50,
+            "cloudConditions": 100,
+            "chanceOfRain": 80,
             "humidity": 50
         },
         "Las Vegas": {
