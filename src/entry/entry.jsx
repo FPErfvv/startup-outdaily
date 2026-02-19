@@ -43,7 +43,13 @@ export function Entry() {
         const weatherInfo = weatherAPISimulator[entry.location];
         console.log("weatherInfo: ", weatherInfo);
         if (weatherInfo) {
-            setWeatherInfo([weatherInfo.temp, weatherInfo.cloudConditions, weatherInfo.chanceOfRain, weatherInfo.humidity]);
+            if (weatherInfo.cloudConditions > 75) {
+                setWeatherInfo([weatherInfo.temp, "cloudy", weatherInfo.chanceOfRain, weatherInfo.humidity]);
+            } else if (weatherInfo.cloudConditions < 25) {
+                setWeatherInfo([weatherInfo.temp, "sunny", weatherInfo.chanceOfRain, weatherInfo.humidity]);
+            } else {
+                setWeatherInfo([weatherInfo.temp, "scattered", weatherInfo.chanceOfRain, weatherInfo.humidity]);
+            }
             addpoints(calculatePoints(weatherInfo, entry.duration));
             setLocalStreak(localStreak + 1);
         }
