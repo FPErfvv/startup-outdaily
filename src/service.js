@@ -18,7 +18,8 @@ export function handleRegister(username, email, password) {
         return { success: false, message: 'Email already exists' };
     } else {
         console.log("username: ", username, "email: ", email, "password: ", password);
-        users.push({ username, email, password });
+        let newUser = { username, email, password, streak: 0, points: 0 };
+        users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
         return { success: true, message: 'Registration successful' };
     }

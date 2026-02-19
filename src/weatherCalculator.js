@@ -12,11 +12,12 @@ export function calculatePoints(weatherInfo, duration) {
     let normalizedChanceOfRain = chanceOfRain/100;
     let normalizedHumidity = humidity/100;
     let normalizedCloudConditions = cloudConditions / 100;
+    let normalizedDuration = duration / 60;
 
     points += normalizedCloudConditions * weights.cloudConditions;
     points += normalizedTemp * weights.temp;
     points += normalizedChanceOfRain * weights.chanceOfRain;
     points += normalizedHumidity * weights.humidity;
-    points += duration * weights.duration;
+    points += normalizedDuration * weights.duration;
     return Math.round(points);
 }
