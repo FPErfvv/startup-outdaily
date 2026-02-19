@@ -103,10 +103,6 @@ export function Entry() {
                                     <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" required onChange={(e)=>(setEntry({...entry, title: e.target.value}))}/>
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="entryDate" className="form-label">Entry Date</label>
-                                    <input type="date" className="form-control" id="entryDate" name="entryDate" required onChange={(e)=>(setEntry({...entry, date: e.target.value}))}/>
-                                </div>
-                                <div className="mb-3">
                                     <label htmlFor="entryDuration" className="form-label">Entry Duration (minutes)</label>
                                     <input type="number" className="form-control" id="entryDuration" name="entryDuration" min="1" required onChange={(e)=>(setEntry({...entry, duration: e.target.value}))}/>
                                 </div>
