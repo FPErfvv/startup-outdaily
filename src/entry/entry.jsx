@@ -2,8 +2,10 @@ import React from 'react';
 import "./entry.css"
 import { useUser } from '../UserContext';
 import { getStreak, getPoints, updatePoints } from '../service';
+import { calculatePoints } from '../weatherCalculator';
 export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
+    const [entry, setEntry] = React.useState({title: "", date: "", duration: "", location: "", description: ""});
     const [weatherImageUrl, setWeatherImageUrl] = React.useState("Loading...");
     const { userName } = useUser();
     const [localStreak, setLocalStreak] = React.useState(0);
@@ -31,9 +33,50 @@ export function Entry() {
         setLocalPoints(points);
     },[userName])
 
-    function addpoints() {
-        updatePoints(userName, 10);
-        setLocalPoints(localPoints + 10);
+    function addpoints(points) {
+        updatePoints(userName, points);
+        setLocalPoints(localPoints + points);
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        const weatherInfo = weatherAPISimulator[entry.location];
+        console.log("weatherInfo: ", weatherInfo);
+        if (weatherInfo) {
+            setWeatherInfo([weatherInfo.temp, weatherInfo.cloudConditions, weatherInfo.chanceOfRain, weatherInfo.humidity]);
+            addpoints(calculatePoints(weatherInfo, entry.duration));
+            setLocalStreak(localStreak + 1);
+        }
+        else {
+            console.log("Weather information not found");
+        }
+      }
+
+    const weatherAPISimulator = {
+        /**
+         * temp: Celsius
+         * cloudConditions: 0-100 percent
+         * chanceOfRain: 0-100 percent
+         * humidity: 0-100 percent
+         */
+        "Provo": {
+            "temp": 25,
+            "cloudConditions": 50,
+            "chanceOfRain": 50,
+            "humidity": 50
+        },
+        "Salt Lake City": {
+            "temp": 20,
+            "cloudConditions": 50,
+            "chanceOfRain": 50,
+            "humidity": 50
+        },
+        "Las Vegas": {
+            "temp": 30,
+            "cloudConditions": 50,
+            "chanceOfRain": 50,
+            "humidity": 50
+        }
     }
   return (
         <main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
@@ -48,30 +91,30 @@ export function Entry() {
                     <section> 
                         <fieldset className="border border-2 mt-5 me-5 shadow">
                             <legend className="text-center bg-success bg-opacity-50">New Entry</legend>
-                            <form className="px-4 py-3">
+                            <form className="px-4 py-3" onSubmit={handleSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="entryTitle" className="form-label">Entry Title</label>
-                                    <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" required/>
+                                    <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" required onChange={(e)=>(setEntry({...entry, title: e.target.value}))}/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="entryDate" className="form-label">Entry Date</label>
-                                    <input type="date" className="form-control" id="entryDate" name="entryDate" required/>
+                                    <input type="date" className="form-control" id="entryDate" name="entryDate" required onChange={(e)=>(setEntry({...entry, date: e.target.value}))}/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="entryDuration" className="form-label">Entry Duration (minutes)</label>
-                                    <input type="number" className="form-control" id="entryDuration" name="entryDuration" min="1" required />
+                                    <input type="number" className="form-control" id="entryDuration" name="entryDuration" min="1" required onChange={(e)=>(setEntry({...entry, duration: e.target.value}))}/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="location" className="form-label">Entry location </label>
-                                    <input type="text" className="form-control" id="location" name="location" placeholder="Location"/>
+                                    <input type="text" className="form-control" id="location" name="location" placeholder="Location" onChange={(e)=>(setEntry({...entry, location: e.target.value}))}/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="entryDescription" className="form-label">Entry Description (optional)</label>
-                                    <textarea id="entryDescription" className="form-control" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?"></textarea>
+                                    <textarea id="entryDescription" className="form-control" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?" onChange={(e)=>(setEntry({...entry, description: e.target.value}))}></textarea>
                                 </div>
                                 
                                 <div className="d-flex justify-content-center">
-                                    <button type="submit" className="btn btn-success" onClick={addpoints}>Submit Entry</button>
+                                    <button type="submit" className="btn btn-success">Submit Entry</button>
                                 </div>
                             </form>
                         </fieldset>

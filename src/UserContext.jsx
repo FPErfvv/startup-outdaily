@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 const UserContext = createContext(null);
 
 export function UserProvider({ children }) {
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [currentPage, setCurrentPage] = useState('unauthenticated');
