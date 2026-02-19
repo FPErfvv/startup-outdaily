@@ -1,7 +1,7 @@
 import React from 'react';
 import "./entry.css"
 import { useUser } from '../UserContext';
-import { getStreak, getPoints, updateUser } from '../service';
+import { getStreak, getPoints, updateStreak, updatePoints } from '../service';
 import { calculatePoints } from '../weatherCalculator';
 export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
@@ -33,9 +33,9 @@ export function Entry() {
         setLocalPoints(points);
     },[userName])
 
-    function addpoints(points) {
-        updateUser(userName, points);
-        setLocalPoints(localPoints + points);
+    function updatePointsAndStreak(points) {
+        setLocalStreak(updateStreak(userName));
+        setLocalPoints(updatePoints(userName, points));
     }
 
     function handleSubmit(event) {
@@ -50,8 +50,7 @@ export function Entry() {
             } else {
                 setWeatherInfo([weatherInfo.temp, "scattered", weatherInfo.chanceOfRain, weatherInfo.humidity]);
             }
-            addpoints(calculatePoints(weatherInfo, entry.duration));
-            setLocalStreak(localStreak + 1);
+            updatePointsAndStreak(calculatePoints(weatherInfo, entry.duration));
         }
         else {
             console.log("Weather information not found");

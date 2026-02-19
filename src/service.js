@@ -67,10 +67,10 @@ export function getPoints(username) {
     return users.find(user => user.username === username).points;
 }
 
-function updateStreak(username) {
+export function updateStreak(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     if (!users.find(user => user.username === username)) {
-        return false;
+        return 0;
     }
     const date = new Date().toISOString();
     const lastEntryDate = users.find(user => user.username === username).lastEntryDate;
@@ -78,24 +78,28 @@ function updateStreak(username) {
         users.find(user => user.username === username).lastEntryDate = date;
         users.find(user => user.username === username).streak = 1;
         localStorage.setItem('users', JSON.stringify(users));
-        return true;
+        return users.find(user => user.username === username).streak;
     }
     const lastEntryDateFormatted = lastEntryDate.split('T')[0];
     const dateFormatted = date.split('T')[0];
     console.log("lastEntryDateFormatted: ", lastEntryDateFormatted);
     console.log("dateFormatted: ", dateFormatted);
     console.log("isConsecutiveDays: ", isConsecutiveDays(lastEntryDateFormatted, dateFormatted));   
-
-    if (isConsecutiveDays(lastEntryDateFormatted, dateFormatted)) {
+    if (lastEntryDateFormatted === dateFormatted) {
+        return users.find(user => user.username === username).streak;
+    }
+    else if (isConsecutiveDays(lastEntryDateFormatted, dateFormatted)) {
         users.find(user => user.username === username).streak += 1;
         users.find(user => user.username === username).lastEntryDate = date;
+        localStorage.setItem('users', JSON.stringify(users));
+        return users.find(user => user.username === username).streak;
     }
     else {
         users.find(user => user.username === username).streak = 0;
         users.find(user => user.username === username).lastEntryDate = date;
+        localStorage.setItem('users', JSON.stringify(users));
+        return users.find(user => user.username === username).streak;
     }
-    localStorage.setItem('users', JSON.stringify(users));
-    return true;
 }
 
 function isConsecutiveDays(dateStr1, dateStr2) {
@@ -104,19 +108,14 @@ function isConsecutiveDays(dateStr1, dateStr2) {
     
     const diff = (d2 - d1) / (24 * 60 * 60 * 1000);
     return diff === 1;
-  }
-console.log("isConsecutiveDays: ", isConsecutiveDays("2026-02-18", "2026-02-20"));
-function updatePoints(username, delta) {
+}
+
+export function updatePoints(username, delta) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     if (!users.find(user => user.username === username)) {
-        return false;
+        return 0;
     }
     users.find(user => user.username === username).points += delta;
     localStorage.setItem('users', JSON.stringify(users));
-    return true;
-}
-
-export function updateUser(username, pointsDelta) {
-    updateStreak(username);
-    updatePoints(username, pointsDelta);
+    return users.find(user => user.username === username).points;
 }
