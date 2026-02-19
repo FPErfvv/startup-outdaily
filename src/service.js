@@ -66,17 +66,17 @@ export function getPoints(username) {
     return users.find(user => user.username === username).points;
 }
 
-export function updateStreak(username, delta) {
+function updateStreak(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     if (!users.find(user => user.username === username)) {
         return false;
     }
-    users.find(user => user.username === username).streak += delta;
+    users.find(user => user.username === username).streak += 1;
     localStorage.setItem('users', JSON.stringify(users));
     return true;
 }
 
-export function updatePoints(username, delta) {
+function updatePoints(username, delta) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     if (!users.find(user => user.username === username)) {
         return false;
@@ -84,4 +84,9 @@ export function updatePoints(username, delta) {
     users.find(user => user.username === username).points += delta;
     localStorage.setItem('users', JSON.stringify(users));
     return true;
+}
+
+export function updateUser(username, pointsDelta) {
+    updateStreak(username);
+    updatePoints(username, pointsDelta);
 }

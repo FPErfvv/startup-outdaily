@@ -1,7 +1,7 @@
 import React from 'react';
 import "./entry.css"
 import { useUser } from '../UserContext';
-import { getStreak, getPoints, updatePoints } from '../service';
+import { getStreak, getPoints, updateUser } from '../service';
 import { calculatePoints } from '../weatherCalculator';
 export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
@@ -34,7 +34,7 @@ export function Entry() {
     },[userName])
 
     function addpoints(points) {
-        updatePoints(userName, points);
+        updateUser(userName, points);
         setLocalPoints(localPoints + points);
     }
 
