@@ -3,6 +3,7 @@ export function handleLogin(email, password) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     if (users.find(user => user.email === email)) {
         if (password === users.find(user => user.email === email).password) {
+            updateLeaderboard(users.find(user => user.email === email).username, users.find(user => user.email === email).points, users.find(user => user.email === email).streak);
             return { success: true, message: 'Login successful' };
         } else {
             return { success: false, message: 'Password is incorrect' };
