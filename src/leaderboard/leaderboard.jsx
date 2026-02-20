@@ -1,5 +1,5 @@
 import React from 'react';
-import { simulateLeaderboard, updateLeaderboard } from '../service';
+import { simulateLeaderboard, updateLeaderboard, getLeaderboard } from '../service';
 import { useUser } from '../UserContext';
 export function Leaderboard() {
     const { userName } = useUser();
@@ -9,6 +9,28 @@ export function Leaderboard() {
     React.useEffect(() => {
         setLeaderboard(simulateLeaderboard());
     }, []);
+
+    React.useEffect(() => {
+        setInterval(() => {
+            const lb = getLeaderboard();
+            if (lb.length > 0) {
+                let length = lb.length;
+                let randomIndex = Math.floor(Math.random() * length);
+                let randomUser = lb[randomIndex];
+                if (randomUser.username === userName) {
+                    return;
+                } else {
+                    randomUser.points += Math.floor(Math.random() * 100);
+                    randomUser.streak += 1;
+                    updateLeaderboard(randomUser.username, randomUser.points, randomUser.streak);
+                    setLeaderboard(getLeaderboard());
+                    console.log("randomUser: ", randomUser);
+                }
+            }
+        }, Math.floor(Math.random() * 1000)+5000);
+    }, []);
+
+
 
   return (
         <main className="container py-4 flex-grow-1 flex-shrink-1">
