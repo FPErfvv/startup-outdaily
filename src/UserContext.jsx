@@ -9,7 +9,8 @@ export function UserProvider({ children }) {
   const [password, setPassword] = useState('');
   const [currentPage, setCurrentPage] = useState('unauthenticated');
   const [alertMessage, setAlertMessage] = useState('');
-
+  const [points, setPoints] = useState(0);
+  const [streak, setStreak] = useState(0);
   const value = {
     userName,
     setUserName,
@@ -21,6 +22,10 @@ export function UserProvider({ children }) {
     setCurrentPage,
     alertMessage,
     setAlertMessage,
+    points,
+    setPoints,
+    streak,
+    setStreak,
   };
 
   return (

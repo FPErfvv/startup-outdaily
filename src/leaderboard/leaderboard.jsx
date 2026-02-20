@@ -1,12 +1,21 @@
 import React from 'react';
-
+import { simulateLeaderboard, updateLeaderboard } from '../service';
+import { useUser } from '../UserContext';
 export function Leaderboard() {
+    const { userName } = useUser();
+    const [leaderboard, setLeaderboard] = React.useState([]);
+    const { points } = useUser();
+    const { streak } = useUser();
+    React.useEffect(() => {
+        setLeaderboard(simulateLeaderboard());
+    }, []);
+
   return (
         <main className="container py-4 flex-grow-1 flex-shrink-1">
             <fieldset>
                 <legend className="text-decoration-underline display-6">Leaderboard</legend>
                 <div className="bg-danger bg-opacity-25 border rounded-3 px-3 pt-3 mb-3">
-                    <h5>Note: </h5>
+                    <h5 onClick={() => console.log(leaderboard)}>Note: </h5>
                     <p>Scores are based off of the total points, not based off of the streak. The leaderboard will automatically adjust when the rankings change as a result of a change in a users score.</p>
                 </div>
                 <table className="table table-success table-striped shadow border border-success">
@@ -19,30 +28,15 @@ export function Leaderboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>OutDailyPro</td>
-                            <td>1000</td>
-                            <td>60 Days</td>
+                     {leaderboard.map((user, index) => (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{user.username}</td>
+                            <td>{user.points}</td>
+                            <td>{user.streak} Days</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>TreeHugger</td>
-                            <td>800</td>
-                            <td>50 Days</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bill</td>
-                            <td>300</td>
-                            <td>20 Days</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>BestHiker26</td>
-                            <td>120</td>
-                            <td>9 Days</td>
-                        </tr>
+                     ))}   
+                     
                     </tbody>
                 </table>
             </fieldset>

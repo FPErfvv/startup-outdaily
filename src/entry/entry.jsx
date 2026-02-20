@@ -1,15 +1,16 @@
 import React from 'react';
 import "./entry.css"
 import { useUser } from '../UserContext';
-import { getStreak, getPoints, updateStreak, updatePoints } from '../service';
+import { getStreak, getPoints, updateStreak, updatePoints, updateLeaderboard } from '../service';
 import { calculatePoints } from '../weatherCalculator';
 export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
     const [entry, setEntry] = React.useState({title: "", date: "", duration: "", location: "", description: ""});
     const [weatherImageUrl, setWeatherImageUrl] = React.useState("Loading...");
     const { userName } = useUser();
-    const [localStreak, setLocalStreak] = React.useState(0);
-    const [localPoints, setLocalPoints] = React.useState(0);
+    const { streak, setStreak } = useUser();
+    const { points, setPoints } = useUser();
+    const {alertMessage, setAlertMessage} = useUser();
     const weatherState = {
         "sunny": "images/weather/few.png",
         "scattered": "images/weather/sct.png",
@@ -26,22 +27,27 @@ export function Entry() {
     },[weatherInfo])
     React.useEffect(() => {
         const streak = getStreak(userName);
-        setLocalStreak(streak);
+        setStreak(streak);
     },[userName])
     React.useEffect(() => {
         const points = getPoints(userName);
-        setLocalPoints(points);
+        setPoints(points);
     },[userName])
 
     function updatePointsAndStreak(points) {
-        setLocalStreak(updateStreak(userName));
-        setLocalPoints(updatePoints(userName, points));
+        let newStreak = updateStreak(userName);
+        let newPoints = updatePoints(userName, points);
+        setStreak(newStreak);
+        setPoints(newPoints);
+        console.log("newStreak: ", newStreak);
+        console.log("newPoints: ", newPoints);
+        updateLeaderboard(userName, newPoints, newStreak);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
         const weatherInfo = weatherAPISimulator[entry.location];
-        console.log("weatherInfo: ", weatherInfo);
+
         if (weatherInfo) {
             if (weatherInfo.cloudConditions > 75) {
                 setWeatherInfo([weatherInfo.temp, "cloudy", weatherInfo.chanceOfRain, weatherInfo.humidity]);
@@ -53,7 +59,7 @@ export function Entry() {
             updatePointsAndStreak(calculatePoints(weatherInfo, entry.duration));
         }
         else {
-            console.log("Weather information not found");
+            setAlertMessage("Weather information not found");
         }
       }
 
@@ -89,8 +95,8 @@ export function Entry() {
                 <div className="flex-fill col-md-10 overflow-auto ps-5">
                     <h2 className="text-center my-3">Welcome: {userName}</h2>
                     <div className="text-center">
-                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2">Streak: {localStreak} days</p>
-                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2" id="points"><span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">Points: {localPoints}</span></p> 
+                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2">Streak: {streak} days</p>
+                        <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2" id="points"><span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">Points: {points}</span></p> 
                     </div>
 
                     <section> 
