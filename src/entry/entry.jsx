@@ -3,6 +3,7 @@ import "./entry.css"
 import { useUser } from '../UserContext';
 import { getStreak, getPoints, updateStreak, updatePoints, updateLeaderboard } from '../service';
 import { calculatePoints } from '../weatherCalculator';
+import { useNavigate } from 'react-router-dom';
 export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
     const [entry, setEntry] = React.useState({title: "", date: "", duration: "", location: "", description: ""});
@@ -11,6 +12,8 @@ export function Entry() {
     const { streak, setStreak } = useUser();
     const { points, setPoints } = useUser();
     const {alertMessage, setAlertMessage} = useUser();
+    const { currentPage } = useUser();
+    const navigate = useNavigate();
     const weatherState = {
         "sunny": "images/weather/few.png",
         "scattered": "images/weather/sct.png",
@@ -33,6 +36,11 @@ export function Entry() {
         const points = getPoints(userName);
         setPoints(points);
     },[userName])
+    React.useEffect(() => {
+        if (currentPage === 'unauthenticated') {
+            navigate('/');
+        }
+    },[currentPage]);
 
     function updatePointsAndStreak(points) {
         let newStreak = updateStreak(userName);

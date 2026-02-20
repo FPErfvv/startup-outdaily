@@ -1,12 +1,13 @@
 import React from 'react';
 import { simulateLeaderboard, updateLeaderboard, getLeaderboard } from '../service';
 import { useUser } from '../UserContext';
+import { useNavigate } from 'react-router-dom';
 export function Leaderboard() {
     const { userName } = useUser();
     const [leaderboard, setLeaderboard] = React.useState([]);
     const { points } = useUser();
     const { currentPage } = useUser();
-
+    const navigate = useNavigate();
     const [messageboard, setMessageboard] = React.useState([]);
 
     function addMessage(message) {
@@ -27,6 +28,12 @@ export function Leaderboard() {
     }, []);
 
     React.useEffect(() => {
+        if (currentPage === 'unauthenticated') {
+            navigate('/');
+        }
+    },[currentPage]);
+
+    React.useEffect(() => {
         let interval = null;
         if (currentPage === 'authenticated') {
         interval = setInterval(() => {
@@ -41,7 +48,8 @@ export function Leaderboard() {
                     } else {
                         randomUser.points += Math.floor(Math.random() * 50);
                         randomUser.streak += 1;
-                        let message = "Leaderboard updated! " + randomUser.username + " now has a score of " + randomUser.points + ". They are now ahead of you by " + (randomUser.points - points) + " points";   
+                        let pointsDelta = randomUser.points - points;
+                        let message = "Leaderboard updated! " + randomUser.username + " now has a score of " + randomUser.points + ". They are now " + (pointsDelta > 0 ? "ahead of" : "behind") + " you by " + Math.abs(pointsDelta) + " points";   
                         addMessage(message);
                         updateLeaderboard(randomUser.username, randomUser.points, randomUser.streak);
                         setLeaderboard(getLeaderboard());
