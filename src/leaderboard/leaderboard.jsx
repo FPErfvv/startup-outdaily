@@ -28,12 +28,12 @@ export function Leaderboard() {
                         </tr>
                     </thead>
                     <tbody>
-                     {leaderboard.map((user, index) => (
+                     {leaderboard.sort((a, b) => b.points - a.points).map((user, index) => (
                         <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{user.username}</td>
                             <td>{user.points}</td>
-                            <td>{user.streak} Days</td>
+                            <td>{user.streak} {user.streak === 1 ? "Day" : "Days"}</td>
                         </tr>
                      ))}   
                      
