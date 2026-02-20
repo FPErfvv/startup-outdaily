@@ -54,6 +54,7 @@ export function Entry() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        if (entry.location in weatherAPISimulator) { 
         const weatherInfo = weatherAPISimulator[entry.location];
 
         if (weatherInfo) {
@@ -69,7 +70,11 @@ export function Entry() {
         else {
             setAlertMessage("Weather information not found");
         }
-      }
+    }
+    else {
+        setAlertMessage("Location not found. Please enter a valid location. The following locations are available: " + Object.keys(weatherAPISimulator).join(", "));
+    }
+    }
 
     const weatherAPISimulator = {
         /**

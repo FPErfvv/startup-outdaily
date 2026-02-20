@@ -19,9 +19,6 @@ export function Leaderboard() {
         setMessageboard(newMessageboard);
     }
 
-    React.useEffect(() => {
-        console.log("messageboard: ", messageboard);
-    }, [messageboard]);
 
     React.useEffect(() => {
         setLeaderboard(simulateLeaderboard());
