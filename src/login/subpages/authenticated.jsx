@@ -1,10 +1,12 @@
 import React from 'react';
 import { useUser } from '../../UserContext';
+import { updateDBonLogout } from '../../service';
 export function Authenticated() {
     const { setCurrentPage, userName } = useUser();
 
     function handleLogout(event) {
         event.preventDefault();
+        updateDBonLogout(userName);
         setCurrentPage('unauthenticated');
     }
   return (

@@ -4,6 +4,8 @@ import React, { createContext, useContext, useState } from 'react';
 const UserContext = createContext(null);
 
 export function UserProvider({ children }) {
+  
+
   const [userName, setUserName] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,6 +13,19 @@ export function UserProvider({ children }) {
   const [alertMessage, setAlertMessage] = useState('');
   const [points, setPoints] = useState(0);
   const [streak, setStreak] = useState(0);
+  React.useEffect(() => {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const loggedInUser = users.find(user => user.loggedIn);
+    if (loggedInUser) {
+      setUserName(loggedInUser.username);
+      setEmail(loggedInUser.email);
+      setPassword(loggedInUser.password);
+      setCurrentPage('authenticated');
+      setPoints(loggedInUser.points);
+      setStreak(loggedInUser.streak);
+    }
+  }, []);
+
   const value = {
     userName,
     setUserName,

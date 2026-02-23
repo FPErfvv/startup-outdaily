@@ -15,7 +15,7 @@ export function handleLogin(email, password) {
     return { success: false, message: 'Email or password is incorrect or does not exist' };
 }
 
-export function handleLogout(username) {
+export function updateDBonLogout(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = getUser(users, username = username, "");
     if (user) {

@@ -45,7 +45,7 @@ export function Entry() {
     }
 
     function handleSubmit(event) {
-        
+        event.preventDefault();
         if (entry.location in weatherAPISimulator) { 
         const weatherInfo = weatherAPISimulator[entry.location];
 
@@ -59,6 +59,7 @@ export function Entry() {
             }
             const durationMinutes = Number(entry.duration) || 0;
             updatePointsAndStreak(calculatePoints(weatherInfo, durationMinutes));
+            setEntry({title: "", date: "", duration: "", location: "", description: ""});
         }
         else {
             setAlertMessage("Weather information not found");
@@ -111,19 +112,19 @@ export function Entry() {
                             <form className="px-4 py-3" onSubmit={handleSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="entryTitle" className="form-label">Entry Title</label>
-                                    <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" required onChange={(e)=>(setEntry({...entry, title: e.target.value}))}/>
+                                    <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" value={entry.title} required onChange={(e)=>(setEntry({...entry, title: e.target.value}))}/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="entryDuration" className="form-label">Entry Duration (minutes)</label>
-                                    <input type="number" className="form-control" id="entryDuration" name="entryDuration" min="1" required onChange={(e)=>(setEntry({...entry, duration: e.target.value}))}/>
+                                    <input type="number" className="form-control" id="entryDuration" name="entryDuration" min="1" value={entry.duration} required onChange={(e)=>(setEntry({...entry, duration: e.target.value}))}/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="location" className="form-label">Entry location </label>
-                                    <input type="text" className="form-control" id="location" name="location" placeholder="Location" onChange={(e)=>(setEntry({...entry, location: e.target.value}))}/>
+                                    <input type="text" className="form-control" id="location" name="location" placeholder="Location" value={entry.location} onChange={(e)=>(setEntry({...entry, location: e.target.value}))}/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="entryDescription" className="form-label">Entry Description (optional)</label>
-                                    <textarea id="entryDescription" className="form-control" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?" onChange={(e)=>(setEntry({...entry, description: e.target.value}))}></textarea>
+                                    <textarea id="entryDescription" className="form-control" name="entryDescription" rows="4" placeholder="How was your experience out in nature? What did you see?" value={entry.description} onChange={(e)=>(setEntry({...entry, description: e.target.value}))}></textarea>
                                 </div>
                                 
                                 <div className="d-flex justify-content-center">
