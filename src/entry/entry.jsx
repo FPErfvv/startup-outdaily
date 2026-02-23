@@ -143,7 +143,7 @@ export function Entry() {
                                         {weatherInfo[0]} <span>&#176;</span>
                                     </div>
                                     <div className="ms-4 display-6 my-2">
-                                        {weatherInfo[1]}
+                                        {weatherInfo[1].charAt(0).toUpperCase() + weatherInfo[1].slice(1)}
                                     </div>
                                     <div className="ms-4">
                                         Chance of rain: {weatherInfo[2]}%
