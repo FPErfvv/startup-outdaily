@@ -23,7 +23,7 @@ export function Unauthenticated() {
     return (
         <div className="bd-example border border-3 rounded-top-5 flex-fill flex-column m-3 col-md-10 shadow">
             <h3 className="py-4 text-center bg-success bg-opacity-50 rounded-top-5 border border-3">Start tracking every experience with nature.</h3>
-            <form className="px-4 py-3">
+            <form className="px-4 py-3" onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="exampleDropdownFormEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" onChange={(e)=>(setEmail(e.target.value))} />
@@ -41,7 +41,7 @@ export function Unauthenticated() {
                 </div>
                 </div>
                 <div className="d-flex justify-content-center">
-                    <button type="submit" className="btn btn-success px-5" onClick={handleSubmit}>Sign in</button>
+                    <button type="submit" className="btn btn-success px-5">Sign in</button>
                 </div>
                 
             </form>

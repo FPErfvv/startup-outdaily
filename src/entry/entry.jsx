@@ -45,7 +45,7 @@ export function Entry() {
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
+        
         if (entry.location in weatherAPISimulator) { 
         const weatherInfo = weatherAPISimulator[entry.location];
 
@@ -57,7 +57,8 @@ export function Entry() {
             } else {
                 setWeatherInfo([weatherInfo.temp, "scattered", weatherInfo.chanceOfRain, weatherInfo.humidity]);
             }
-            updatePointsAndStreak(calculatePoints(weatherInfo, entry.duration));
+            const durationMinutes = Number(entry.duration) || 0;
+            updatePointsAndStreak(calculatePoints(weatherInfo, durationMinutes));
         }
         else {
             setAlertMessage("Weather information not found");

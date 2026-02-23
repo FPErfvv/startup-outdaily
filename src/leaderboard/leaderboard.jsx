@@ -70,7 +70,7 @@ export function Leaderboard() {
                         </tr>
                     </thead>
                     <tbody>
-                     {leaderboard.sort((a, b) => b.points - a.points).map((user, index) => (
+                     {[...leaderboard].sort((a, b) => b.points - a.points).map((user, index) => (
                         <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{user.username}</td>

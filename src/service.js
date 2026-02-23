@@ -5,12 +5,24 @@ export function handleLogin(email, password) {
     if (user) {
         if (password === user.password) {
             updateLeaderboard(user.username, user.points, user.streak);
+            user.loggedIn = true;
+            localStorage.setItem('users', JSON.stringify(users));
             return { success: true, message: 'Login successful' };
         } else {
             return { success: false, message: 'Password is incorrect' };
         }   
     }
     return { success: false, message: 'Email or password is incorrect or does not exist' };
+}
+
+export function handleLogout(username) {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = getUser(users, username = username, "");
+    if (user) {
+        user.loggedIn = false;
+        localStorage.setItem('users', JSON.stringify(users));
+        return { success: true, message: 'Logout successful' };
+    }
 }
 
 export function handleRegister(username, email, password) {
@@ -20,7 +32,7 @@ export function handleRegister(username, email, password) {
     } else if (getUser(users, email = email)) {
         return { success: false, message: 'Email already exists' };
     } else {
-        let newUser = { username, email, password, streak: 0, points: 0, lastEntryDate: null };
+        let newUser = { username, email, password, streak: 0, points: 0, lastEntryDate: null, loggedIn: true };
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
         updateLeaderboard(username, 0, 0);
