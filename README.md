@@ -20,7 +20,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 Have you ever felt the call of the wild? Have you ever felt like something was missing within yourself? We all have! Due to our fast paced and work oriented society, we often miss out on opportunities to stop and literally smell the roses. This application, the **Nature Tracker**, encourages users to spend more time outside and enjoy the wonderous world in which we live. Its simple design allows the user to track time spent outside and even compete with others to see who can spend the most consecutive days enjoying the beauties of mother nature. Spending more time outside can literally change your life, as mentioned in [this article](https://hsph.harvard.edu/news/time-spent-in-nature-can-boost-physical-and-mental-well-being/).
 ### Design
 
-![Design image](images/naturetrackerdesign.jpg)
+![Design image](public/images/naturetrackerdesign.jpg)
 
 The photo above demonstrates the three main pages (features) of the application.
 
@@ -101,8 +101,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I used the browser local storage to save user information like streaks, points, and login info. In the `entry.jsx` a dictionary called `weatherAPISimulator` was used to simulate a weather service. This allows the user to put in a few locations to the entry form and receive simulated weather data. This weather data is then processed to calculate the points and show a different display on the entry page. Additionally, on the `leaderboard.jsx` page the leaderboard is auto-filled with simulated players, whose scores are periodically incremented to simulate the webhook. When the ranking changes, the leaderboard adjusts as well. Finally, an adaptive message board was added to the leaderboard page to show the alerts when someone changes their score. 
+
+- [x] **Hooks** - `useState` calls were used to allow for adaptive UI and the `useEffect` was used to ensure the variables are initialized properly when reloaded. See `UserContext.jsx`.
 
 ## 🚀 Service deliverable
 

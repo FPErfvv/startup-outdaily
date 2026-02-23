@@ -55,3 +55,5 @@ I found that by following the instructions on canvas, everything went quite smoo
 ## React Part 2: Reactivity
 
 Here is the codepen for the practice reactivity: (reactivity)[https://codepen.io/FPErfvv/pen/KwMJXwL?editors=1010]
+
+Something that I struggled with was understanding what was going to be used when and what variables were available to be changed. For example, when I put something in a setInterval function the variables were not accessible using the normal method. But, I figured out that I could use the arrow functions to make sure it was accessible. 
