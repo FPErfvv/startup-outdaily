@@ -1,8 +1,7 @@
 import React from 'react';
 import { useUser } from '../../UserContext';
 export function ForgotPassword() {
-    const { email, setEmail } = useUser();
-    const { currentPage, setCurrentPage } = useUser();
+    const { setEmail, setCurrentPage } = useUser();
     return (
         <div className="bd-example border border-3 rounded-top-5 flex-fill flex-column m-3 col-md-10 shadow">
             <h3 className="py-4 text-center bg-success bg-opacity-50 rounded-top-5 border border-3">Start tracking every experience with nature.</h3>

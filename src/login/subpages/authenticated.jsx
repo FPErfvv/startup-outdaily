@@ -1,7 +1,7 @@
 import React from 'react';
 import { useUser } from '../../UserContext';
 export function Authenticated() {
-    const { currentPage, setCurrentPage, userName } = useUser();
+    const { setCurrentPage, userName } = useUser();
 
     function handleLogout(event) {
         event.preventDefault();

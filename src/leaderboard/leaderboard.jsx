@@ -3,17 +3,14 @@ import { simulateLeaderboard, updateLeaderboard, getLeaderboard } from '../servi
 import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Leaderboard() {
-    const { userName } = useUser();
-    const [ setLeaderboard] = React.useState([]);
+    const { userName, currentPage, points } = useUser();
+    const [ leaderboard, setLeaderboard] = React.useState([]);
     const navigate = useNavigate();
     const [messageboard, setMessageboard] = React.useState([]);
 
     function addMessage(message) {
-        let newMessageboard = messageboard;
-        newMessageboard.push(message);  
-        if (newMessageboard.length > 10) {
-            newMessageboard.shift();
-        }
+        const newMessageboard = messageboard.length >= 10 ?
+        [...messageboard.slice(1), message] : [...messageboard, message];
         setMessageboard(newMessageboard);
     }
 
@@ -47,6 +44,7 @@ export function Leaderboard() {
                     }
                 }
             }, Math.floor(Math.random() * 1000)+5000);
+            return () => clearInterval(interval);
         } else {
             clearInterval(interval);
         }

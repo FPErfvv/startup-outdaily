@@ -1,9 +1,10 @@
 // The following functions handle the transfer of user info
 export function handleLogin(email, password) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (users.find(user => user.email === email)) {
-        if (password === users.find(user => user.email === email).password) {
-            updateLeaderboard(users.find(user => user.email === email).username, users.find(user => user.email === email).points, users.find(user => user.email === email).streak);
+    const user = getUser(users, "", email = email);
+    if (user) {
+        if (password === user.password) {
+            updateLeaderboard(user.username, user.points, user.streak);
             return { success: true, message: 'Login successful' };
         } else {
             return { success: false, message: 'Password is incorrect' };
@@ -14,12 +15,11 @@ export function handleLogin(email, password) {
 
 export function handleRegister(username, email, password) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (users.find(user => user.username === username)) {
+    if (getUser(users, username = username)) {
         return { success: false, message: 'Username already exists' };
-    } else if (users.find(user => user.email === email)) {
+    } else if (getUser(users, email = email)) {
         return { success: false, message: 'Email already exists' };
     } else {
-        const date = new Date();
         let newUser = { username, email, password, streak: 0, points: 0, lastEntryDate: null };
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
@@ -30,73 +30,74 @@ export function handleRegister(username, email, password) {
 
 export function getEmail(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    return users.find(user => user.username === username).email;
+    return getUser(users, username = username, "").email;
 }
 
 export function getPassword(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    return users.find(user => user.username === username).password;
+    return getUser(users, username = username, "").password;
 }
 
 export function getUsername(email) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     console.log(users);
-    return users.find(user => user.email === email).username;
+    return getUser(users, "", email = email).username;
 }
 
 export function getStreak(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (!users.find(user => user.username === username)) {
+    const user = getUser(users, username = username, "");
+    if (!user) {
         return 0;
     }
-    else if (!users.find(user => user.username === username).streak) {
+    else if (!user.streak) {
         return 0;
     }
-    return users.find(user => user.username === username).streak;
+    return user.streak;
 }
 
 export function getPoints(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (!users.find(user => user.username === username)) {
+    const user = getUser(users, username = username, "");
+    if (!user) {
         return 0;
-    } else if (!users.find(user => user.username === username).points) {
+    } else if (!user.points) {
         return 0;
     }
-    console.log("points: ", users.find(user => user.username === username).points);
-    console.log("username: ", username);
-    return users.find(user => user.username === username).points;
+    return user.points;
 }
 
 // The following functions handle the update of user info
 export function updateStreak(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (!users.find(user => user.username === username)) {
+    const user = getUser(users, username = username, "");
+    if (!user) {
         return 0;
     }
     const date = new Date().toISOString();
-    const lastEntryDate = users.find(user => user.username === username).lastEntryDate;
+    const lastEntryDate = user.lastEntryDate;
     if (lastEntryDate === null) {
-        users.find(user => user.username === username).lastEntryDate = date;
-        users.find(user => user.username === username).streak = 1;
+        user.lastEntryDate = date;
+        user.streak = 1;
         localStorage.setItem('users', JSON.stringify(users));
-        return users.find(user => user.username === username).streak;
+        return user.streak;
     }
     const lastEntryDateFormatted = lastEntryDate.split('T')[0];
     const dateFormatted = date.split('T')[0]; 
     if (lastEntryDateFormatted === dateFormatted) {
-        return users.find(user => user.username === username).streak;
+        return user.streak;
     }
     else if (isConsecutiveDays(lastEntryDateFormatted, dateFormatted)) {
-        users.find(user => user.username === username).streak += 1;
-        users.find(user => user.username === username).lastEntryDate = date;
+        user.streak += 1;
+        user.lastEntryDate = date;
         localStorage.setItem('users', JSON.stringify(users));
-        return users.find(user => user.username === username).streak;
+        return user.streak;
     }
     else {
-        users.find(user => user.username === username).streak = 1;
-        users.find(user => user.username === username).lastEntryDate = date;
+        user.streak = 1;
+        user.lastEntryDate = date;
         localStorage.setItem('users', JSON.stringify(users));
-        return users.find(user => user.username === username).streak;
+        return user.streak;
     }
 }
 
@@ -112,12 +113,13 @@ function isConsecutiveDays(dateStr1, dateStr2) {
 // The following function handles the update of points
 export function updatePoints(username, delta) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (!users.find(user => user.username === username)) {
+    const user = getUser(users, username = username, "");
+    if (!user) {
         return 0;
     }
-    users.find(user => user.username === username).points += delta;
+    user.points += delta;
     localStorage.setItem('users', JSON.stringify(users));
-    return users.find(user => user.username === username).points;
+    return user.points;
 }
 
 // The following function handles the retrieval of the leaderboard
@@ -142,13 +144,26 @@ export function simulateLeaderboard() {
 
 export function updateLeaderboard(username, points, streak) {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    if (!leaderboard.find(user => user.username === username)) {
+    const user = getUser(leaderboard, username = username, "");
+    if (!user) {
         leaderboard.push({ username: username, points: points, streak: streak });
     }
     else {
-        leaderboard.find(user => user.username === username).points = points;
-        leaderboard.find(user => user.username === username).streak = streak;
+        user.points = points;
+        user.streak = streak;
     }
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
     return leaderboard;
+}
+
+function getUser(users, username = "", email = "") {
+    if (username !== "") {
+        return users.find(user => user.username === username);
+    }
+    else if (email !== "") {
+        return users.find(user => user.email === email);
+    }
+    else {
+        return null;
+    }
 }

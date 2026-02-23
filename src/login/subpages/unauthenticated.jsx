@@ -5,11 +5,7 @@ import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 
 export function Unauthenticated() {
-    const { email, setEmail } = useUser();
-    const { password, setPassword } = useUser();
-    const { setCurrentPage } = useUser();
-    const { setUserName } = useUser();
-    const { setAlertMessage } = useUser();
+    const { setEmail, setPassword, setCurrentPage, setUserName, setAlertMessage, email, password } = useUser();
     const navigate = useNavigate();
     function handleSubmit(event) {
         event.preventDefault();

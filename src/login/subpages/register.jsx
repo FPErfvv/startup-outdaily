@@ -2,11 +2,7 @@ import React from 'react';
 import { handleRegister } from '../../service';
 import { useUser } from '../../UserContext';
 export function Register() {
-    const { userName, setUserName } = useUser();
-    const { email, setEmail } = useUser();
-    const { password, setPassword } = useUser();
-    const { setCurrentPage } = useUser();
-    const { setAlertMessage } = useUser();
+    const { setUserName, setEmail, setPassword, setCurrentPage, setAlertMessage, email, password, userName } = useUser();
     function handleSubmit(event) {
         event.preventDefault();
         const result = handleRegister(userName, email, password);

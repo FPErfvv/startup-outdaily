@@ -6,7 +6,7 @@ import { Register } from './subpages/register';
 import { useUser } from '../UserContext';
 
 export function Login() {
-    const { currentPage, setCurrentPage } = useUser();
+    const { currentPage } = useUser();
   return (
         <main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
             <div className="d-flex flex-column flex-md-row align-items-stretch">

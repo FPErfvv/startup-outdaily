@@ -8,11 +8,7 @@ export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
     const [entry, setEntry] = React.useState({title: "", date: "", duration: "", location: "", description: ""});
     const [weatherImageUrl, setWeatherImageUrl] = React.useState("Loading...");
-    const { userName } = useUser();
-    const { streak, setStreak } = useUser();
-    const { points, setPoints } = useUser();
-    const {alertMessage, setAlertMessage} = useUser();
-    const { currentPage } = useUser();
+    const { userName, setStreak, setPoints, setAlertMessage, streak, points } = useUser();
     const navigate = useNavigate();
     const weatherState = {
         "sunny": "images/weather/few.png",
