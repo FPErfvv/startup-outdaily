@@ -135,7 +135,7 @@ export function getLeaderboard() {
 // The following function handles the simulation of the leaderboard, as if it were pulling from a database
 export function simulateLeaderboard() {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    if (leaderboard.length === 0) {
+    if (leaderboard.length < 2) {
         leaderboard.push({ username: 'OutDailyPro', points: 1000, streak: 60 });
         leaderboard.push({ username: 'TreeHugger', points: 800, streak: 50 });
         leaderboard.push({ username: 'Bill', points: 300, streak: 20 });

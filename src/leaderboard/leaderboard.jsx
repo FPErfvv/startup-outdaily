@@ -22,13 +22,9 @@ export function Leaderboard() {
 
     React.useEffect(() => {
         setLeaderboard(simulateLeaderboard());
-    }, []);
+    }, [currentPage]);
 
-    React.useEffect(() => {
-        if (currentPage === 'unauthenticated') {
-            navigate('/');
-        }
-    },[currentPage]);
+
 
     React.useEffect(() => {
         let interval = null;

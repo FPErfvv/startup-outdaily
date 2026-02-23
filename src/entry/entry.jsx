@@ -36,11 +36,7 @@ export function Entry() {
         const points = getPoints(userName);
         setPoints(points);
     },[userName])
-    React.useEffect(() => {
-        if (currentPage === 'unauthenticated') {
-            navigate('/');
-        }
-    },[currentPage]);
+
 
     function updatePointsAndStreak(points) {
         let newStreak = updateStreak(userName);
