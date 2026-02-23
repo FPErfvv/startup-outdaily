@@ -7,19 +7,20 @@ export function Leaderboard() {
     const [ leaderboard, setLeaderboard] = React.useState([]);
     const navigate = useNavigate();
     const [messageboard, setMessageboard] = React.useState([]);
+    const [messageNumber, setMessageNumber] = React.useState(1);
 
-    function addMessage(message) {
-        const newMessageboard = messageboard.length >= 10 ?
-        [...messageboard.slice(1), message] : [...messageboard, message];
-        setMessageboard(newMessageboard);
+    function incrementMessageNumber() {
+        setMessageNumber(prev => prev + 1);
     }
 
+    function addMessage(message) {
+        setMessageboard( prev => prev.length >= 10 ? [...prev.slice(1), message] : [...prev, message] );
+        incrementMessageNumber();
+    }
 
     React.useEffect(() => {
         setLeaderboard(simulateLeaderboard());
     }, [currentPage]);
-
-
 
     React.useEffect(() => {
         let interval = null;
@@ -85,12 +86,14 @@ export function Leaderboard() {
                     <h5 >Messageboard: </h5>
                     <p>The leaderboard will automatically adjust when the rankings change as a result of a change in a users score.</p>
                     
-                        {messageboard.map((message, index) => (
-                            <div key={index} className="bg-white border rounded-3 px-3 py-3 mb-3"> 
-                                <h6>Message {index + 1} ⚠️:</h6>
-                                <p>{message}</p> 
-                            </div>
-                        ))}
+                        {messageboard.map((message, index) => {
+                            return (
+                                <div key={index} className="bg-white border rounded-3 px-3 py-3 mb-3"> 
+                                    <h6>Message {messageNumber - (messageboard.length - index)} ⚠️:</h6>
+                                    <p>{message}</p> 
+                                </div>
+                            )
+                        })}
                     
             </div>
         </main>
