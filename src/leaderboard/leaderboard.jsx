@@ -4,9 +4,7 @@ import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Leaderboard() {
     const { userName } = useUser();
-    const [leaderboard, setLeaderboard] = React.useState([]);
-    const { points } = useUser();
-    const { currentPage } = useUser();
+    const [ setLeaderboard] = React.useState([]);
     const navigate = useNavigate();
     const [messageboard, setMessageboard] = React.useState([]);
 

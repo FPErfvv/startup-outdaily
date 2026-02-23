@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 export function Unauthenticated() {
     const { email, setEmail } = useUser();
     const { password, setPassword } = useUser();
-    const { currentPage, setCurrentPage } = useUser();
-    const { userName, setUserName } = useUser();
-    const { alertMessage, setAlertMessage } = useUser();
+    const { setCurrentPage } = useUser();
+    const { setUserName } = useUser();
+    const { setAlertMessage } = useUser();
     const navigate = useNavigate();
     function handleSubmit(event) {
         event.preventDefault();

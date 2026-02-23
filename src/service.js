@@ -20,7 +20,6 @@ export function handleRegister(username, email, password) {
         return { success: false, message: 'Email already exists' };
     } else {
         const date = new Date();
-        console.log("username: ", username, "email: ", email, "password: ", password, "date: ", date);
         let newUser = { username, email, password, streak: 0, points: 0, lastEntryDate: null };
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
@@ -53,8 +52,6 @@ export function getStreak(username) {
     else if (!users.find(user => user.username === username).streak) {
         return 0;
     }
-    console.log("streak: ", users.find(user => user.username === username).streak);
-    console.log("username: ", username);
     return users.find(user => user.username === username).streak;
 }
 
@@ -85,10 +82,7 @@ export function updateStreak(username) {
         return users.find(user => user.username === username).streak;
     }
     const lastEntryDateFormatted = lastEntryDate.split('T')[0];
-    const dateFormatted = date.split('T')[0];
-    console.log("lastEntryDateFormatted: ", lastEntryDateFormatted);
-    console.log("dateFormatted: ", dateFormatted);
-    console.log("isConsecutiveDays: ", isConsecutiveDays(lastEntryDateFormatted, dateFormatted));   
+    const dateFormatted = date.split('T')[0]; 
     if (lastEntryDateFormatted === dateFormatted) {
         return users.find(user => user.username === username).streak;
     }
@@ -99,7 +93,7 @@ export function updateStreak(username) {
         return users.find(user => user.username === username).streak;
     }
     else {
-        users.find(user => user.username === username).streak = 0;
+        users.find(user => user.username === username).streak = 1;
         users.find(user => user.username === username).lastEntryDate = date;
         localStorage.setItem('users', JSON.stringify(users));
         return users.find(user => user.username === username).streak;
