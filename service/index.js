@@ -19,20 +19,14 @@ function setAuthCookie(res, user) {
 }
 
 
-
 const users = [];
 
-async function createUser(email, password) {
+async function createUser(email, username, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
-  const user = {
-    email: email,
-    password: passwordHash,
-  };
-
-  users.push(user);
-
-  return user;
+  const newUser = new User(email, username, null, 0, 0, passwordHash, true);
+  users.push(newUser);
+  return newUser;
 }
 
 function getUser(field, value) {
@@ -98,3 +92,40 @@ const port = 4000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
 });
+
+
+class User {
+  constructor(email, username, lastEntryDate, points, streak, password, loggedIn) {
+    this.email = email;
+    this.username = username;
+    this.lastEntryDate = lastEntryDate;
+    this.points = points;
+    this.streak = streak;
+    this.password = password;
+    this.loggedIn = loggedIn;
+  }
+
+  setEmail(email) {
+    this.email = email;
+  }
+
+  setUsername(username) {
+    this.username = username;
+  }
+
+  setLastEntryDate(lastEntryDate) {
+    this.lastEntryDate = lastEntryDate;
+  }
+
+  setPoints(points) {
+    this.points = points;
+  }
+
+  setStreak(streak) {
+    this.streak = streak;
+  }
+
+  setPassword(password) {
+    this.password = password;
+  }
+}
