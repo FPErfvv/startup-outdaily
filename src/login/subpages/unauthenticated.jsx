@@ -7,18 +7,25 @@ import { useNavigate } from 'react-router-dom';
 export function Unauthenticated() {
     const { setEmail, setPassword, setCurrentPage, setUserName, setAlertMessage, email, password } = useUser();
     const navigate = useNavigate();
-    function handleSubmit(event) {
-        event.preventDefault();
-        const result = handleLogin(email, password);
-        if (result.success) {
-            
+    
+      async function createAuth(method) {
+        const res = await fetch('api/auth', {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        await res.json();
+        if (res.ok) {
             setUserName(getUsername(email));
             setCurrentPage('authenticated');
             navigate('/entry');
         } else {
-            console.log(result.message);
-            setAlertMessage(result.message);
+            setAlertMessage('Authentication failed');
         }
+      }
+    function handleSubmit(event) {
+        event.preventDefault();
+        createAuth('PUT');
     }
     return (
         <div className="bd-example border border-3 rounded-top-5 flex-fill flex-column m-3 col-md-10 shadow">
