@@ -23,7 +23,7 @@ function NotFound() {
 }
 
 function AppContent() {
-    const { alertMessage, setAlertMessage } = useUser();
+    const { alertMessage, setAlertMessage, currentPage } = useUser();
     React.useEffect(() => {
         if (alertMessage) {
             setTimeout(() => {
@@ -42,13 +42,13 @@ function AppContent() {
                     
                     <ul className="nav mb-0 justify-content-left px-3 flex-shrink-0">
                         <li className="nav-item">
-                            {useUser().currentPage === "authenticated" && (<NavLink to="" className="nav-link px-3 mt-2">Home</NavLink>)}
+                            {currentPage === "authenticated" && (<NavLink to="" className="nav-link px-3 mt-2">Home</NavLink>)}
                         </li>
                         <li className="nav-item">
-                            {useUser().currentPage === "authenticated" && (<NavLink to="entry" className="nav-link px-3 mt-2">Entry Page</NavLink>)}
+                            {currentPage === "authenticated" && (<NavLink to="entry" className="nav-link px-3 mt-2">Entry Page</NavLink>)}
                         </li>
                         <li className="nav-item">
-                            {useUser().currentPage === "authenticated" && (
+                            {currentPage === "authenticated" && (
                                 <NavLink to="leaderboard" className="nav-link px-3 mt-2">
                                     Leaderboard
                                 </NavLink>)}
