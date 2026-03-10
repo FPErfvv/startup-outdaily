@@ -6,7 +6,7 @@ const UserContext = createContext(null);
 export function UserProvider({ children }) {
   
 
-  const [userName, setUserName] = useState(null);
+  const [username, setUsername] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [currentPage, setCurrentPage] = useState('unauthenticated');
@@ -17,7 +17,7 @@ export function UserProvider({ children }) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const loggedInUser = users.find(user => user.loggedIn);
     if (loggedInUser) {
-      setUserName(loggedInUser.username);
+      setUsername(loggedInUser.username);
       setEmail(loggedInUser.email);
       setPassword(loggedInUser.password);
       setCurrentPage('authenticated');
@@ -27,8 +27,8 @@ export function UserProvider({ children }) {
   }, []);
 
   const value = {
-    userName,
-    setUserName,
+    username,
+    setUsername,
     email,
     setEmail,
     password,

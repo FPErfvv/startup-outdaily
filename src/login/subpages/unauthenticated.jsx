@@ -5,7 +5,7 @@ import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 
 export function Unauthenticated() {
-    const { setEmail, setPassword, setCurrentPage, setUserName, setAlertMessage, email, password } = useUser();
+    const { setEmail, setPassword, setCurrentPage, setUsername, setAlertMessage, email, password } = useUser();
     const navigate = useNavigate();
     
     async function handleLogin(event) {
@@ -17,7 +17,7 @@ export function Unauthenticated() {
         });
         await res.json();
         if (res.ok) {
-            setUserName(getUsername(email));
+            setUsername(getUsername(email));
             setCurrentPage('authenticated');
             navigate('/entry');
         } else {

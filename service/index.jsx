@@ -41,7 +41,7 @@ app.post('/api/auth', async (req, res) => {
     if (await getUser('email', req.body.email)) {
       res.status(409).send({ msg: 'Existing user' });
     } else {
-      const user = await createUser(req.body.email, req.body.username,req.body.password);
+      const user = await createUser(req.body.email, req.body.username, req.body.password);
   
       setAuthCookie(res, user);
   
@@ -88,7 +88,7 @@ app.get('/api/user/me', async (req, res) => {
     }
   });
 
-const port = 5173;
+const port = 4000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
 });

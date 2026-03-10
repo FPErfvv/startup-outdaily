@@ -3,7 +3,7 @@ import { simulateLeaderboard, updateLeaderboard, getLeaderboard } from '../servi
 import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Leaderboard() {
-    const { userName, currentPage, points } = useUser();
+    const { username, currentPage, points } = useUser();
     const [ leaderboard, setLeaderboard] = React.useState([]);
     const navigate = useNavigate();
     const [messageboard, setMessageboard] = React.useState([]);
@@ -32,7 +32,7 @@ export function Leaderboard() {
                     let length = lb.length;
                     let randomIndex = Math.floor(Math.random() * length);
                     let randomUser = lb[randomIndex];
-                    if (randomUser.username === userName) {
+                    if (randomUser.username === username) {
                         return;
                     } else {
                         randomUser.points += Math.floor(Math.random() * 50);

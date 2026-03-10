@@ -50,10 +50,18 @@ export function getPassword(username) {
     return getUser(users, username = username, "").password;
 }
 
-export function getUsername(email) {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    console.log(users);
-    return getUser(users, "", email = email).username;
+export async function getUsername(email) {
+    const res = await fetch('/api/auth', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+          return res.json().username;
+      } else {
+          return null;
+      }
 }
 
 export function getStreak(username) {

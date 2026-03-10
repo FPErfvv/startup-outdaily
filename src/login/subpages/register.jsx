@@ -3,18 +3,19 @@ import { handleRegister } from '../../service';
 import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Register() {
-    const { setUserName, setEmail, setPassword, setCurrentPage, setAlertMessage, email, password, userName } = useUser();
+    const { setUsername, setEmail, setPassword, setCurrentPage, setAlertMessage, email, password, username } = useUser();
 
     async function handleSubmit(event) {
         event.preventDefault();
+        console.log(JSON.stringify({ email, password, username }));
         const res = await fetch('/api/auth', {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, userName }),
+          body: JSON.stringify({ email, password, username }),
         });
         await res.json();
         if (res.ok) {
-            setUserName(userName);
+            setUsername(username);
             setEmail(email);
             setPassword(password);
             setCurrentPage('authenticated');
@@ -30,7 +31,7 @@ export function Register() {
             <form className="px-4 py-3" onSubmit={(event) => handleSubmit(event)}>
             <div className="mb-3">
                     <label htmlFor="exampleDropdownFormUsername1" className="form-label">Username</label>
-                    <input type="text" className="form-control" id="exampleDropdownFormUsername1" placeholder="Username" onChange={(e)=>(setUserName(e.target.value))} />
+                    <input type="text" className="form-control" id="exampleDropdownFormUsername1" placeholder="Username" onChange={(e)=>(setUsername(e.target.value))} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleDropdownFormEmail1" className="form-label">Email address</label>

@@ -8,7 +8,7 @@ export function Entry() {
     const [weatherInfo, setWeatherInfo] = React.useState(["Loading...","Loading...","Loading...","Loading..."]); // Temp, cloud conditions, chance of rain, humidity
     const [entry, setEntry] = React.useState({title: "", date: "", duration: "", location: "", description: ""});
     const [weatherImageUrl, setWeatherImageUrl] = React.useState("Loading...");
-    const { userName, setStreak, setPoints, setAlertMessage, streak, points } = useUser();
+    const { username, setStreak, setPoints, setAlertMessage, streak, points } = useUser();
     const navigate = useNavigate();
     const weatherState = {
         "sunny": "images/weather/few.png",
@@ -25,23 +25,23 @@ export function Entry() {
         setWeatherImageUrl(weatherState[weatherInfo[1]]);
     },[weatherInfo])
     React.useEffect(() => {
-        const streak = getStreak(userName);
+        const streak = getStreak(username);
         setStreak(streak);
-    },[userName])
+    },[username])
     React.useEffect(() => {
-        const points = getPoints(userName);
+        const points = getPoints(username);
         setPoints(points);
-    },[userName])
+    },[username])
 
 
     function updatePointsAndStreak(points) {
-        let newStreak = updateStreak(userName);
-        let newPoints = updatePoints(userName, points);
+        let newStreak = updateStreak(username);
+        let newPoints = updatePoints(username, points);
         setStreak(newStreak);
         setPoints(newPoints);
         console.log("newStreak: ", newStreak);
         console.log("newPoints: ", newPoints);
-        updateLeaderboard(userName, newPoints, newStreak);
+        updateLeaderboard(username, newPoints, newStreak);
     }
 
     function handleSubmit(event) {
@@ -100,7 +100,7 @@ export function Entry() {
         <main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
             <div className="d-flex flex-column flex-md-row align-items-stretch flex-grow-1 flex-shrink-1 overflow-hidden">
                 <div className="flex-fill col-md-10 overflow-auto ps-5">
-                    <h2 className="text-center my-3">Welcome: {userName}</h2>
+                    <h2 className="text-center my-3">Welcome: {username}</h2>
                     <div className="text-center">
                         <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2">Streak: {streak} days</p>
                         <p className="d-inline m-2 fs-5 bg-success bg-opacity-25 p-2 rounded-2" id="points"><span title="The points are calculated based off of a variety of factors, including the current streak, the length of time spent outside, the current temperature, etc.">Points: {points}</span></p> 
