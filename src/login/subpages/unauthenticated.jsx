@@ -8,9 +8,10 @@ export function Unauthenticated() {
     const { setEmail, setPassword, setCurrentPage, setUserName, setAlertMessage, email, password } = useUser();
     const navigate = useNavigate();
     
-      async function createAuth(method) {
-        const res = await fetch('api/auth', {
-          method: method,
+    async function handleLogin(event) {
+        event.preventDefault();
+        const res = await fetch('/api/auth', {
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
         });
@@ -23,14 +24,10 @@ export function Unauthenticated() {
             setAlertMessage('Authentication failed');
         }
       }
-    function handleSubmit(event) {
-        event.preventDefault();
-        createAuth('PUT');
-    }
     return (
         <div className="bd-example border border-3 rounded-top-5 flex-fill flex-column m-3 col-md-10 shadow">
             <h3 className="py-4 text-center bg-success bg-opacity-50 rounded-top-5 border border-3">Start tracking every experience with nature.</h3>
-            <form className="px-4 py-3" onSubmit={handleSubmit}>
+            <form className="px-4 py-3" onSubmit={(event) => handleLogin(event)}>
                 <div className="mb-3">
                     <label htmlFor="exampleDropdownFormEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" onChange={(e)=>(setEmail(e.target.value))} />

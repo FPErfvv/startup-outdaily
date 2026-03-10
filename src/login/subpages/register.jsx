@@ -1,26 +1,33 @@
 import React from 'react';
 import { handleRegister } from '../../service';
 import { useUser } from '../../UserContext';
+import { useNavigate } from 'react-router-dom';
 export function Register() {
     const { setUserName, setEmail, setPassword, setCurrentPage, setAlertMessage, email, password, userName } = useUser();
-    function handleSubmit(event) {
+
+    async function handleSubmit(event) {
         event.preventDefault();
-        const result = handleRegister(userName, email, password);
-        if (result.success) {
-            
+        const res = await fetch('/api/auth', {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, userName }),
+        });
+        await res.json();
+        if (res.ok) {
             setUserName(userName);
             setEmail(email);
             setPassword(password);
             setCurrentPage('authenticated');
+            navigate('/entry');
         } else {
-            console.log(result.message);
-            setAlertMessage(result.message);
+          setAlertMessage('Authentication failed');
         }
-    }
+      }
+
     return (
         <div className="bd-example border border-3 rounded-top-5 flex-fill flex-column m-3 col-md-10 shadow">
             <h3 className="py-4 text-center bg-success bg-opacity-50 rounded-top-5 border border-3">Start tracking every experience with nature.</h3>
-            <form className="px-4 py-3">
+            <form className="px-4 py-3" onSubmit={(event) => handleSubmit(event)}>
             <div className="mb-3">
                     <label htmlFor="exampleDropdownFormUsername1" className="form-label">Username</label>
                     <input type="text" className="form-control" id="exampleDropdownFormUsername1" placeholder="Username" onChange={(e)=>(setUserName(e.target.value))} />
@@ -42,7 +49,7 @@ export function Register() {
                 </div>
                 </div>
                 <div className="d-flex justify-content-center">
-                    <button type="submit" className="btn btn-success px-5" onClick={handleSubmit}>Sign up</button>
+                    <button type="submit" className="btn btn-success px-5">Sign up</button>
                 </div>
                 
             </form>
