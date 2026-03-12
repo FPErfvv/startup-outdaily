@@ -51,16 +51,17 @@ export function getPassword(username) {
 }
 
 export async function getUsername(email) {
-    const res = await fetch('/api/auth', {
+    const res = await fetch('/api/user/me', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
       });
-      const data = await res.json();
+      
       if (res.ok) {
-          return res.json().username;
+        console.log(res);
+        const data = await res.json();
+        return data.username;
       } else {
-          return null;
+        console.log(res);
+        return null;
       }
 }
 

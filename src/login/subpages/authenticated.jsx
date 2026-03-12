@@ -6,9 +6,12 @@ export function Authenticated() {
 
     function handleLogout(event) {
         event.preventDefault();
-        updateDBonLogout(username);
+        fetch('api/auth', {
+          method: 'DELETE',
+        });
         setCurrentPage('unauthenticated');
-    }
+      }
+
   return (
         
                 <div className="bd-example border border-3 rounded-top-5 flex-fill flex-column m-3 col-md-10 shadow">

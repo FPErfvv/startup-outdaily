@@ -12,7 +12,7 @@ function setAuthCookie(res, user) {
   user.token = uuid.v4();
 
   res.cookie('token', user.token, {
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
     sameSite: 'strict',
   });
@@ -78,11 +78,30 @@ app.delete('/api/auth', async (req, res) => {
   }
 
 // getMe
+
 app.get('/api/user/me', async (req, res) => {
+  const token = req.cookies['token'];
+  const user = await getUser('token', token);
+  if (user) {
+    const userInfo = {
+      email: user.email,
+      username: user.username,
+      lastEntryDate: user.lastEntryDate,
+      points: user.points,
+      streak: user.streak,
+    };
+    res.send(userInfo);
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+
+app.post('/api/getUsername', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     if (user) {
-      res.send({ email: user.email });
+      res.send({ email: user.email, username: user.username });
     } else {
       res.status(401).send({ msg: 'Unauthorized' });
     }

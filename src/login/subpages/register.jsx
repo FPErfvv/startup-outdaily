@@ -4,7 +4,7 @@ import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Register() {
     const { setUsername, setEmail, setPassword, setCurrentPage, setAlertMessage, email, password, username } = useUser();
-
+    const navigate = useNavigate();
     async function handleSubmit(event) {
         event.preventDefault();
         console.log(JSON.stringify({ email, password, username }));

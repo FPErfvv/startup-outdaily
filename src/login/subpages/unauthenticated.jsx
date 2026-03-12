@@ -17,7 +17,7 @@ export function Unauthenticated() {
         });
         await res.json();
         if (res.ok) {
-            setUsername(getUsername(email));
+            setUsername(await getUsername(email));
             setCurrentPage('authenticated');
             navigate('/entry');
         } else {
