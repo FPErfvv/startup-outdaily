@@ -65,6 +65,15 @@ export async function getUsername(email) {
       }
 }
 
+
+export async function getUserInfo() {
+    const res = await fetch('/api/user/me', {
+        method: 'GET',
+        credentials: 'include',
+      });
+      return await res.json();
+}
+
 export function getStreak(username) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = getUser(users, username = username, "");

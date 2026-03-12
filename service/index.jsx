@@ -55,11 +55,24 @@ app.put('/api/auth', async (req, res) => {
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
       setAuthCookie(res, user);
   
-      res.send({ email: user.email });
+      res.send({ email: user.email, username: user.username });
     } else {
       res.status(401).send({ msg: 'Unauthorized' });
     }
   });
+
+
+app.put('/api/user/updatePoints', async (req, res) => {
+  const token = req.cookies['token'];
+  const user = await getUser('token', token);
+  if (user) {
+    user.points = req.body.points;
+    res.send({ points: user.points });
+  }
+  else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
 
 // logout
 app.delete('/api/auth', async (req, res) => {
@@ -90,26 +103,47 @@ app.get('/api/user/me', async (req, res) => {
       points: user.points,
       streak: user.streak,
     };
-    res.send(userInfo);
+    res.status(200).send({ status: 200, data: userInfo });
   } else {
-    res.status(401).send({ msg: 'Unauthorized' });
+    res.status(401).send({ status: 401, msg: 'Unauthorized' });
   }
 });
 
 
-app.post('/api/getUsername', async (req, res) => {
-    const token = req.cookies['token'];
-    const user = await getUser('token', token);
-    if (user) {
-      res.send({ email: user.email, username: user.username });
-    } else {
-      res.status(401).send({ msg: 'Unauthorized' });
-    }
-  });
-
 const port = 4000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
+});
+
+app.put('/api/user/updateStreak', async (req, res) => {
+  const token = req.cookies['token'];
+  const user = await getUser('token', token);
+
+
+  const date = new Date().toISOString();
+  const lastEntryDate = user.lastEntryDate;
+  if (lastEntryDate === null) {
+      user.lastEntryDate = date;
+      user.streak = 1;
+      res.send({ streak: user.streak });
+      return;
+  }
+  const lastEntryDateFormatted = lastEntryDate.split('T')[0];
+  const dateFormatted = date.split('T')[0]; 
+  if (lastEntryDateFormatted === dateFormatted) {
+      return user.streak;
+  }
+  else if (isConsecutiveDays(lastEntryDateFormatted, dateFormatted)) {
+      user.streak += 1;
+      user.lastEntryDate = date;
+      res.send({ streak: user.streak });
+      return;
+  }
+  else {
+      user.streak = 1;
+      user.lastEntryDate = date;
+      return;
+  }
 });
 
 
@@ -124,27 +158,14 @@ class User {
     this.loggedIn = loggedIn;
   }
 
-  setEmail(email) {
-    this.email = email;
-  }
 
-  setUsername(username) {
-    this.username = username;
-  }
+}
 
-  setLastEntryDate(lastEntryDate) {
-    this.lastEntryDate = lastEntryDate;
-  }
-
-  setPoints(points) {
-    this.points = points;
-  }
-
-  setStreak(streak) {
-    this.streak = streak;
-  }
-
-  setPassword(password) {
-    this.password = password;
-  }
+// The following function handles the check for consecutive days
+function isConsecutiveDays(dateStr1, dateStr2) {
+  const d1 = new Date(dateStr1 + 'T00:00:00');  // avoid timezone shifts
+  const d2 = new Date(dateStr2 + 'T00:00:00');
+  
+  const diff = (d2 - d1) / (24 * 60 * 60 * 1000);
+  return diff === 1;
 }

@@ -3,8 +3,10 @@ import { handleRegister } from '../../service';
 import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Register() {
-    const { setUsername, setEmail, setPassword, setCurrentPage, setAlertMessage, email, password, username } = useUser();
+    const { setUsername, setEmail, setCurrentPage, setAlertMessage, email, username } = useUser();
+    const [password, setPassword] = React.useState('');
     const navigate = useNavigate();
+
     async function handleSubmit(event) {
         event.preventDefault();
         console.log(JSON.stringify({ email, password, username }));
@@ -13,11 +15,13 @@ export function Register() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password, username }),
         });
+        
         await res.json();
+        console.log(res.status);
         if (res.ok) {
+            console.log("EVERYTHING IS OKAY");
             setUsername(username);
             setEmail(email);
-            setPassword(password);
             setCurrentPage('authenticated');
             navigate('/entry');
         } else {

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./entry.css"
 import { useUser } from '../UserContext';
-import { getStreak, getPoints, updateStreak, updatePoints, updateLeaderboard } from '../service';
+import { getStreak, getPoints, updateLeaderboard } from '../service';
 import { calculatePoints } from '../weatherCalculator';
 import { useNavigate } from 'react-router-dom';
 export function Entry() {
@@ -24,19 +24,34 @@ export function Entry() {
     React.useEffect(() => {
         setWeatherImageUrl(weatherState[weatherInfo[1]]);
     },[weatherInfo])
-    React.useEffect(() => {
-        const streak = getStreak(username);
-        setStreak(streak);
-    },[username])
-    React.useEffect(() => {
-        const points = getPoints(username);
-        setPoints(points);
-    },[username])
 
 
-    function updatePointsAndStreak(points) {
-        let newStreak = updateStreak(username);
-        let newPoints = updatePoints(username, points);
+
+
+      async function updatePoints(points) {
+        const res = await fetch('/api/user/updatePoints', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ points }),
+        });
+        await res.json();
+        return res.points;
+      }
+
+      async function updateStreak(streak) {
+        const res = await fetch('/api/user/updateStreak', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ streak }),
+        });
+        await res.json();
+        return res.streak;
+      }
+
+
+    async function updatePointsAndStreak() {
+        let newStreak = await updateStreak(username);
+        let newPoints = await updatePoints(username, points);
         setStreak(newStreak);
         setPoints(newPoints);
         console.log("newStreak: ", newStreak);

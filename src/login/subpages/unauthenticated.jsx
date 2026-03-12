@@ -1,11 +1,11 @@
 import React from 'react';
-import { handleLogin } from '../../service';
 import { getUsername } from '../../service';
 import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 
 export function Unauthenticated() {
-    const { setEmail, setPassword, setCurrentPage, setUsername, setAlertMessage, email, password } = useUser();
+    const { setEmail, setCurrentPage, setUsername, setAlertMessage, email } = useUser();
+    const [password, setPassword] = React.useState('');
     const navigate = useNavigate();
     
     async function handleLogin(event) {
@@ -15,9 +15,10 @@ export function Unauthenticated() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
         });
-        await res.json();
-        if (res.ok) {
-            setUsername(await getUsername(email));
+        const data = await res.json();
+        if (data.status === 200) {
+            setUsername(data.username);
+            setEmail(data.email);
             setCurrentPage('authenticated');
             navigate('/entry');
         } else {
