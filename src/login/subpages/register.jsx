@@ -1,5 +1,4 @@
 import React from 'react';
-import { handleRegister } from '../../service';
 import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Register() {
