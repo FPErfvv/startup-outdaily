@@ -113,10 +113,7 @@ app.get('/api/user/me', async (req, res) => {
 });
 
 
-const port = 4000;
-app.listen(port, function () {
-  console.log(`Listening on port ${port}`);
-});
+
 
 app.put('/api/user/updateStreak', async (req, res) => {
   const token = req.cookies['token'];
@@ -149,6 +146,10 @@ app.put('/api/user/updateStreak', async (req, res) => {
 
 });
 
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
 
 class User {
   constructor(email, username, lastEntryDate, points, streak, password, loggedIn) {
@@ -172,3 +173,8 @@ function isConsecutiveDays(dateStr1, dateStr2) {
   const diff = (d2 - d1) / (24 * 60 * 60 * 1000);
   return diff === 1;
 }
+
+const port = 4000;
+app.listen(port, function () {
+  console.log(`Listening on port ${port}`);
+});
