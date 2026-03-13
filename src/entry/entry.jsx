@@ -19,7 +19,7 @@ export function Entry() {
         "nightScattered": "images/weather/nsct.png"
     }
     React.useEffect(() => {
-        setWeatherInfo([75,"sunny",5,40]);
+        setWeatherInfo([20,"sunny",5,40]);
     },[])
     React.useEffect(() => {
         setWeatherImageUrl(weatherState[weatherInfo[1]]);
@@ -90,32 +90,6 @@ export function Entry() {
         }
     }
 
-    const weatherAPISimulator = {
-        /**
-         * temp: Celsius
-         * cloudConditions: 0-100 percent
-         * chanceOfRain: 0-100 percent
-         * humidity: 0-100 percent
-         */
-        "Provo": {
-            "temp": 25,
-            "cloudConditions": 50,
-            "chanceOfRain": 50,
-            "humidity": 20
-        },
-        "Salt Lake City": {
-            "temp": 20,
-            "cloudConditions": 100,
-            "chanceOfRain": 80,
-            "humidity": 50
-        },
-        "Las Vegas": {
-            "temp": 30,
-            "cloudConditions": 50,
-            "chanceOfRain": 50,
-            "humidity": 50
-        }
-    }
   return (
         <main className="container-fluid px-0 flex-grow-1 flex-shrink-1">
             <div className="d-flex flex-column flex-md-row align-items-stretch flex-grow-1 flex-shrink-1 overflow-hidden">
@@ -160,7 +134,7 @@ export function Entry() {
                                 <img src={weatherImageUrl} alt="Representation of what the current day would look like" className="flex-column flex-fill ms-2 rounded-2"/>
                                 <div className="flex-column flex-fill">
                                     <div className="temp ms-4">
-                                        {weatherInfo[0]} <span>&#176;</span>
+                                        {weatherInfo[0]} <span>&#176; C</span>
                                     </div>
                                     <div className="ms-4 display-6 my-2">
                                         {weatherInfo[1].charAt(0).toUpperCase() + weatherInfo[1].slice(1)}

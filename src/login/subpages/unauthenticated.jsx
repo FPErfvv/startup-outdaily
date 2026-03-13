@@ -16,13 +16,13 @@ export function Unauthenticated() {
           body: JSON.stringify({ email, password }),
         });
         const data = await res.json();
-        if (data.status === 200) {
+        if (res.ok) {
             setUsername(data.username);
             setEmail(data.email);
             setCurrentPage('authenticated');
             navigate('/entry');
         } else {
-            setAlertMessage('Authentication failed');
+            setAlertMessage(data.msg);
         }
       }
     return (
