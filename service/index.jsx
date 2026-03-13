@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const bcrypt = require('bcryptjs');
 
+// Serve up the front-end static content hosting
+app.use(express.static('public'));
+
 // Create a token for the user and send a cookie containing the token
 function setAuthCookie(res, user) {
   user.token = uuid.v4();

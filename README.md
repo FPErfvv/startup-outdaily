@@ -109,12 +109,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
+- [ ] **Node.js/Express HTTP service** - Installed Express with NPM. Default port on 4000.js
 - [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Calls to third party endpoints** - I added api calls to a service called Meteo, which pulls 
+coordinate data from a city name and uses that to get the current weather at that place. The functions can be found in `service.js` and are called in the `entry.jsx` page. 
+- [x] **Backend service endpoints** - I added endpoints that allowed for user login, logout, resgistration, data retrieval, and data updates (points and streak)
+- [x] **Frontend calls service endpoints** - Local Storage is no longer being used, and now has been replaced with service calls, many of which in are still in the `service.js` file. 
+- [x] **Supports registration, login, logout, and restricted endpoint** - Verifies user authentication via cookies and compares passwords with those stored in the backend to successfully log in the user. 
 
 ## 🚀 DB deliverable
 
