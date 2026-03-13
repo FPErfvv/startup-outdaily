@@ -66,7 +66,7 @@ app.put('/api/user/updatePoints', async (req, res) => {
   const token = req.cookies['token'];
   const user = await getUser('token', token);
   if (user) {
-    user.points = req.body.points;
+    user.points += req.body.points;
     res.send({ points: user.points });
   }
   else {
@@ -126,24 +126,24 @@ app.put('/api/user/updateStreak', async (req, res) => {
       user.lastEntryDate = date;
       user.streak = 1;
       res.send({ streak: user.streak });
-      return;
+  } else {
+    const lastEntryDateFormatted = lastEntryDate.split('T')[0];
+    const dateFormatted = date.split('T')[0]; 
+    if (lastEntryDateFormatted === dateFormatted) {
+        res.send({ streak: user.streak });
+    }
+    else if (isConsecutiveDays(lastEntryDateFormatted, dateFormatted)) {
+        user.streak += 1;
+        user.lastEntryDate = date;
+        res.send({ streak: user.streak });
+    }
+    else {
+        user.streak = 1;
+        user.lastEntryDate = date;
+        res.send({ streak: user.streak });
+    }
   }
-  const lastEntryDateFormatted = lastEntryDate.split('T')[0];
-  const dateFormatted = date.split('T')[0]; 
-  if (lastEntryDateFormatted === dateFormatted) {
-      return user.streak;
-  }
-  else if (isConsecutiveDays(lastEntryDateFormatted, dateFormatted)) {
-      user.streak += 1;
-      user.lastEntryDate = date;
-      res.send({ streak: user.streak });
-      return;
-  }
-  else {
-      user.streak = 1;
-      user.lastEntryDate = date;
-      return;
-  }
+
 });
 
 

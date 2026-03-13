@@ -35,8 +35,9 @@ export function Entry() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ points }),
         });
-        await res.json();
-        return res.points;
+        const data = await res.json();
+        console.log("data: ", data);
+        return data.points;
       }
 
       async function updateStreak() {
@@ -45,19 +46,21 @@ export function Entry() {
           credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
         });
-        await res.json();
-        return res.streak;
+        const data = await res.json();
+        console.log("data: ", data);
+        return data.streak;
       }
 
 
     async function updatePointsAndStreak(points) {
         let newStreak = await updateStreak();
-        await updatePoints(points);
+        let newPoints = await updatePoints(points);
+        console.log("POINTS: ", points);
         setStreak(newStreak);
-        setPoints(points);
+        setPoints(newPoints);
         console.log("newStreak: ", newStreak);
-        console.log("newPoints: ", points);
-        updateLeaderboard(username, points, newStreak);
+        console.log("newPoints: ", newPoints);
+        updateLeaderboard(username, newPoints, newStreak);
     }
 
     async function handleSubmit(event) {
@@ -79,7 +82,7 @@ export function Entry() {
                 setWeatherInfo([weather.current.temperature_2m, "scattered", weather.current.precipitation, weather.current.relative_humidity_2m]);
             }
             const durationMinutes = Number(entry.duration) || 0;
-            await updatePointsAndStreak(calculatePoints(weatherInfo, durationMinutes));
+            await updatePointsAndStreak(calculatePoints(weather.current, durationMinutes));
             setEntry({title: "", date: "", duration: "", location: "", description: ""});
         }
         else {
