@@ -1,7 +1,7 @@
 import React from 'react';
 import "./entry.css"
 import { useUser } from '../UserContext';
-import { getStreak, getPoints, updateLeaderboard } from '../service';
+import { updateLeaderboard, getCoordinates, getWeather } from '../service';
 import { calculatePoints } from '../weatherCalculator';
 import { useNavigate } from 'react-router-dom';
 export function Entry() {
@@ -31,6 +31,7 @@ export function Entry() {
       async function updatePoints(points) {
         const res = await fetch('/api/user/updatePoints', {
           method: 'PUT',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ points }),
         });
@@ -38,51 +39,52 @@ export function Entry() {
         return res.points;
       }
 
-      async function updateStreak(streak) {
+      async function updateStreak() {
         const res = await fetch('/api/user/updateStreak', {
           method: 'PUT',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ streak }),
         });
         await res.json();
         return res.streak;
       }
 
 
-    async function updatePointsAndStreak() {
-        let newStreak = await updateStreak(username);
-        let newPoints = await updatePoints(username, points);
+    async function updatePointsAndStreak(points) {
+        let newStreak = await updateStreak();
+        await updatePoints(points);
         setStreak(newStreak);
-        setPoints(newPoints);
+        setPoints(points);
         console.log("newStreak: ", newStreak);
-        console.log("newPoints: ", newPoints);
-        updateLeaderboard(username, newPoints, newStreak);
+        console.log("newPoints: ", points);
+        updateLeaderboard(username, points, newStreak);
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        if (entry.location in weatherAPISimulator) { 
-        const weatherInfo = weatherAPISimulator[entry.location];
-
-        if (weatherInfo) {
-            if (weatherInfo.cloudConditions > 75) {
-                setWeatherInfo([weatherInfo.temp, "cloudy", weatherInfo.chanceOfRain, weatherInfo.humidity]);
-            } else if (weatherInfo.cloudConditions < 25) {
-                setWeatherInfo([weatherInfo.temp, "sunny", weatherInfo.chanceOfRain, weatherInfo.humidity]);
+        const coordinates = await getCoordinates(entry.location);
+        console.log("coordinates: ", coordinates);
+        const weather = await getWeather(coordinates.lat, coordinates.lon);
+        
+        console.log("temperature: ", weather.current.temperature_2m);
+        console.log("cloudConditions: ", weather.current.cloud_cover);
+        console.log("chanceOfRain: ", weather.current.precipitation);
+        console.log("humidity: ", weather.current.relative_humidity_2m);
+        if (weather.current) {
+            if (weather.current.cloud_cover > 75) {
+                setWeatherInfo([weather.current.temperature_2m, "cloudy", weather.current.precipitation, weather.current.relative_humidity_2m]);
+            } else if (weather.current.cloud_cover < 25) {
+                setWeatherInfo([weather.current.temperature_2m, "sunny", weather.current.precipitation, weather.current.relative_humidity_2m]);
             } else {
-                setWeatherInfo([weatherInfo.temp, "scattered", weatherInfo.chanceOfRain, weatherInfo.humidity]);
+                setWeatherInfo([weather.current.temperature_2m, "scattered", weather.current.precipitation, weather.current.relative_humidity_2m]);
             }
             const durationMinutes = Number(entry.duration) || 0;
-            updatePointsAndStreak(calculatePoints(weatherInfo, durationMinutes));
+            await updatePointsAndStreak(calculatePoints(weatherInfo, durationMinutes));
             setEntry({title: "", date: "", duration: "", location: "", description: ""});
         }
         else {
             setAlertMessage("Weather information not found");
         }
-    }
-    else {
-        setAlertMessage("Location not found. Please enter a valid location. The following locations are available: " + Object.keys(weatherAPISimulator).join(", "));
-    }
     }
 
     const weatherAPISimulator = {
@@ -124,7 +126,7 @@ export function Entry() {
                     <section> 
                         <fieldset className="border border-2 mt-5 me-5 shadow">
                             <legend className="text-center bg-success bg-opacity-50">New Entry</legend>
-                            <form className="px-4 py-3" onSubmit={handleSubmit}>
+                            <form className="px-4 py-3" onSubmit={async (event) => await handleSubmit(event)}>
                                 <div className="mb-3">
                                     <label htmlFor="entryTitle" className="form-label">Entry Title</label>
                                     <input type="text" className="form-control" id="entryTitle" name="entryTitle" placeholder="Title" value={entry.title} required onChange={(e)=>(setEntry({...entry, title: e.target.value}))}/>

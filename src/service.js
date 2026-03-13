@@ -81,3 +81,24 @@ function getUser(users, username = "", email = "") {
         return null;
     }
 }
+
+export async function getCoordinates(cityName) {
+    const res = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1`
+    );
+    const data = await res.json();
+    if (!data.results?.length) return null;
+    return {
+      lat: data.results[0].latitude,
+      lon: data.results[0].longitude,
+    };
+}
+
+export async function getWeather(lat, lon) {
+    const res = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,cloud_cover,precipitation`
+    );
+    const data = await res.json();
+    console.log("data: ", data);
+    return data;
+}
