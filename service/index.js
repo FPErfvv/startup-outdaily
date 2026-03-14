@@ -64,41 +64,38 @@ app.put('/api/auth', async (req, res) => {
     }
   });
 
-
-app.put('/api/user/updatePoints', async (req, res) => {
+  // logout
+app.delete('/api/auth', async (req, res) => {
   const token = req.cookies['token'];
   const user = await getUser('token', token);
   if (user) {
-    user.points += req.body.points;
-    res.send({ points: user.points });
+    clearAuthCookie(res, user);
   }
-  else {
-    res.status(401).send({ msg: 'Unauthorized' });
-  }
+
+  res.send({});
 });
 
-// logout
-app.delete('/api/auth', async (req, res) => {
-    const token = req.cookies['token'];
-    const user = await getUser('token', token);
-    if (user) {
-      clearAuthCookie(res, user);
-    }
-  
-    res.send({});
-  });
-  
-  function clearAuthCookie(res, user) {
-    delete user.token;
-    res.clearCookie('token');
+// Middleware to verify that the user is authorized to call an endpoint
+const verifyAuth = async (req, res, next) => {
+  const user = await getUser('token', req.cookies['token']);
+  if (user) {
+    req.user = user;
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
   }
+};
 
+
+app.put('/api/user/updatePoints', verifyAuth, (req, res) => {
+  req.user.points += req.body.points;
+  res.send({ points: (req.user.points + req.body.points) });
+});
 // getMe
 
-app.get('/api/user/me', async (req, res) => {
-  const token = req.cookies['token'];
-  const user = await getUser('token', token);
-  if (user) {
+app.get('/api/user/me',verifyAuth, (req, res) => {
+  const user = req.user;
+  
     const userInfo = {
       email: user.email,
       username: user.username,
@@ -107,18 +104,11 @@ app.get('/api/user/me', async (req, res) => {
       streak: user.streak,
     };
     res.status(200).send({ status: 200, data: userInfo });
-  } else {
-    res.status(401).send({ status: 401, msg: 'Unauthorized' });
-  }
 });
 
 
-
-
-app.put('/api/user/updateStreak', async (req, res) => {
-  const token = req.cookies['token'];
-  const user = await getUser('token', token);
-
+app.put('/api/user/updateStreak', verifyAuth, (req, res) => {
+  const user = req.user;
 
   const date = new Date().toISOString();
   const lastEntryDate = user.lastEntryDate;
@@ -145,6 +135,18 @@ app.put('/api/user/updateStreak', async (req, res) => {
   }
 
 });
+
+  
+function clearAuthCookie(res, user) {
+  delete user.token;
+  res.clearCookie('token');
+}
+
+
+
+
+
+
 
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });

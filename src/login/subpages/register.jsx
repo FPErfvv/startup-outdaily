@@ -15,8 +15,8 @@ export function Register() {
           body: JSON.stringify({ email, password, username }),
         });
         
-        await res.json();
-        console.log(res.status);
+        const data = await res.json();
+        console.log(data);
         if (res.ok) {
             console.log("EVERYTHING IS OKAY");
             setUsername(username);

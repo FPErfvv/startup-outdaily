@@ -9,7 +9,7 @@ export function Entry() {
     const [entry, setEntry] = React.useState({title: "", date: "", duration: "", location: "", description: ""});
     const [weatherImageUrl, setWeatherImageUrl] = React.useState("Loading...");
     const { username, setStreak, setPoints, setAlertMessage, streak, points } = useUser();
-    const navigate = useNavigate();
+
     const weatherState = {
         "sunny": "images/weather/few.png",
         "scattered": "images/weather/sct.png",
@@ -18,9 +18,7 @@ export function Entry() {
         "nightClear": "images/weather/nfew.png",
         "nightScattered": "images/weather/nsct.png"
     }
-    React.useEffect(() => {
-        setWeatherInfo([20,"sunny",5,40]);
-    },[])
+
     React.useEffect(() => {
         setWeatherImageUrl(weatherState[weatherInfo[1]]);
     },[weatherInfo])
@@ -67,6 +65,10 @@ export function Entry() {
         event.preventDefault();
         const coordinates = await getCoordinates(entry.location);
         console.log("coordinates: ", coordinates);
+        if (coordinates === null) {
+            setAlertMessage("Location not found");
+            return;
+        }
         const weather = await getWeather(coordinates.lat, coordinates.lon);
         
         console.log("temperature: ", weather.current.temperature_2m);
@@ -130,6 +132,7 @@ export function Entry() {
                     <section>
                         <fieldset className="border border-2 my-5 me-5 shadow">
                             <legend className="text-center bg-primary bg-opacity-50">Current Weather</legend>
+                            {weatherInfo[0] === "Loading..." ? <p className="text-center py-5">Loading...</p> : (
                             <div className="d-flex mb-2">
                                 <img src={weatherImageUrl} alt="Representation of what the current day would look like" className="flex-column flex-fill ms-2 rounded-2"/>
                                 <div className="flex-column flex-fill">
@@ -145,8 +148,9 @@ export function Entry() {
                                     <div className="ms-4">
                                         Humidity: {weatherInfo[3]}%
                                     </div>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </fieldset>
                     </section>
                 </div>
