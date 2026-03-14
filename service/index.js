@@ -89,7 +89,7 @@ const verifyAuth = async (req, res, next) => {
 
 app.put('/api/user/updatePoints', verifyAuth, (req, res) => {
   req.user.points += req.body.points;
-  res.send({ points: (req.user.points + req.body.points) });
+  res.send({ points: req.user.points });
 });
 // getMe
 
