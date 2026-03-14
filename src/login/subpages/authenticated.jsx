@@ -1,12 +1,11 @@
 import React from 'react';
 import { useUser } from '../../UserContext';
-import { updateDBonLogout } from '../../service';
 export function Authenticated() {
     const { setCurrentPage, username } = useUser();
 
     function handleLogout(event) {
         event.preventDefault();
-        fetch('api/auth', {
+        fetch('/api/auth', {
           method: 'DELETE',
         });
         setCurrentPage('unauthenticated');
