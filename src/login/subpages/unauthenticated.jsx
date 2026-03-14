@@ -57,7 +57,6 @@ export function Unauthenticated() {
             <div className="dropdown-divider border"></div>
             <div className="text-center my-1">
                 <a className="dropdown-item m-1 text-decoration-underline d-inline" onClick={() => setCurrentPage('register')}>Sign up</a>
-                <a className="dropdown-item m-1 text-decoration-underline d-inline" onClick={() => setCurrentPage('forgotPassword')}>Forgot password?</a>
             </div>
         </div>
   );

@@ -12,7 +12,6 @@ export function Login() {
             <div className="d-flex flex-column flex-md-row align-items-stretch">
                 {currentPage === 'unauthenticated' && <Unauthenticated />}
                 {currentPage === 'register' && <Register />}
-                {currentPage === 'forgotPassword' && <ForgotPassword />}
                 {currentPage === 'authenticated' && <Authenticated />}
                 <div className="flex-fill flex-column">
                     <img src="images/beautiful-fall-nature-scenery.webp" alt="A beautiful fall nature scene" className="img-fluid w-70 pb-3"/>
