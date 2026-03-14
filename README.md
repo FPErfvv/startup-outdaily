@@ -109,8 +109,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - Installed Express with NPM. Default port on 4000.js
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Installed Express with NPM. Default port on 4000.js
+- [x] **Static middleware for frontend** - I added middleware to verify the users cookies before allowing any get or put requests.
 - [x] **Calls to third party endpoints** - I added api calls to a service called Meteo, which pulls 
 coordinate data from a city name and uses that to get the current weather at that place. The functions can be found in `service.js` and are called in the `entry.jsx` page. 
 - [x] **Backend service endpoints** - I added endpoints that allowed for user login, logout, resgistration, data retrieval, and data updates (points and streak)
