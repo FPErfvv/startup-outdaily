@@ -6,6 +6,7 @@ const weights = {
     duration: 30
 }
 export function calculatePoints(weatherInfo, duration) {
+    duration = duration > 120 ? 120 : duration;
     const { temperature_2m, cloud_cover, precipitation, relative_humidity_2m } = weatherInfo;
     let points = 0;
     let normalizedTemp = (parseFloat(temperature_2m) + 10)/50;
