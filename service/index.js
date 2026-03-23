@@ -27,7 +27,7 @@ const users = [];
 async function createUser(email, username, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
-  const newUser = new User(email, username, null, 0, 0, passwordHash, true);
+  const newUser = new User(email, username, null, 0, 0, passwordHash);
   users.push(newUser);
   return newUser;
 }
@@ -71,7 +71,6 @@ app.delete('/api/auth', async (req, res) => {
   if (user) {
     clearAuthCookie(res, user);
   }
-
   res.send({});
 });
 
@@ -154,14 +153,13 @@ app.use((_req, res) => {
 
 
 class User {
-  constructor(email, username, lastEntryDate, points, streak, password, loggedIn) {
+  constructor(email, username, lastEntryDate, points, streak, password) {
     this.email = email;
     this.username = username;
     this.lastEntryDate = lastEntryDate;
     this.points = points;
     this.streak = streak;
     this.password = password;
-    this.loggedIn = loggedIn;
   }
 
 
