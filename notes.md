@@ -57,3 +57,6 @@ I found that by following the instructions on canvas, everything went quite smoo
 Here is the codepen for the practice reactivity: (reactivity)[https://codepen.io/FPErfvv/pen/KwMJXwL?editors=1010]
 
 Something that I struggled with was understanding what was going to be used when and what variables were available to be changed. For example, when I put something in a setInterval function the variables were not accessible using the normal method. But, I figured out that I could use the arrow functions to make sure it was accessible. 
+
+Mongo DB
+After doing the test mongo db script in class, I was able to set up the simon db relatively easily. I just copied the `dbConfig.json` over and then deployed the code via the deployment script. To debug I checked my mangoDB account online and saw the new simon database in my cluster. Logging in made the user collection to appear, and then actually scoring the points made the score collection to appear as simon pushed data to the database. 
