@@ -69,7 +69,7 @@ app.delete('/api/auth', async (req, res) => {
   if (user) {
     clearAuthCookie(res, user);
   }
-  res.send({});
+  res.status(204).end();
 });
 
 // Middleware to verify that the user is authorized to call an endpoint
@@ -136,9 +136,10 @@ app.put('/api/user/updateStreak', verifyAuth, (req, res) => {
 
   
 function clearAuthCookie(res, user) {
-  DB.updateUserRemoveAuth(user);
+  
   res.clearCookie('token');
   res.status(204).end();
+  DB.updateUserRemoveAuth(user);
 }
 
 
