@@ -37,21 +37,10 @@ async function updateUserRemoveAuth(user) {
   await userCollection.updateOne({ email: user.email }, { $unset: { token: 1 } });
 }
 
-function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
-  };
-  const cursor = scoreCollection.find(query, options);
-  return cursor.toArray();
-}
-
 module.exports = {
   getUser,
   getUserByToken,
   addUser,
   updateUser,
   updateUserRemoveAuth,
-  getHighScores,
 };
