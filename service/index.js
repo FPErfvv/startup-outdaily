@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const uuid = require('uuid');
 app.use(express.json());
+const DB = require('./database.js');
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -28,20 +29,15 @@ async function createUser(email, username, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
   const newUser = new User(email, username, null, 0, 0, passwordHash);
-  users.push(newUser);
+  
+  DB.addUser(newUser);
   return newUser;
 }
-
-function getUser(field, value) {
-  if (value) {
-    return users.find((user) => user[field] === value);
-  }
-  return null;
-}
+ 
 
 // registration
 app.post('/api/auth', async (req, res) => {
-    if (await getUser('email', req.body.email)) {
+    if (await DB.getUser(req.body.email)) {
       res.status(409).send({ msg: 'Existing user' });
     } else {
       const user = await createUser(req.body.email, req.body.username, req.body.password);
@@ -49,16 +45,18 @@ app.post('/api/auth', async (req, res) => {
       setAuthCookie(res, user);
   
       res.send({ email: user.email });
+      DB.updateUser(user);
     }
   });
 
 // login
 app.put('/api/auth', async (req, res) => {
-    const user = await getUser('email', req.body.email);
+    const user = await DB.getUser(req.body.email);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
       setAuthCookie(res, user);
   
       res.send({ email: user.email, username: user.username });
+      DB.updateUser(user);
     } else {
       res.status(401).send({ msg: 'Unauthorized' });
     }
@@ -67,7 +65,7 @@ app.put('/api/auth', async (req, res) => {
   // logout
 app.delete('/api/auth', async (req, res) => {
   const token = req.cookies['token'];
-  const user = await getUser('token', token);
+  const user = await DB.getUserByToken(token);
   if (user) {
     clearAuthCookie(res, user);
   }
@@ -76,7 +74,7 @@ app.delete('/api/auth', async (req, res) => {
 
 // Middleware to verify that the user is authorized to call an endpoint
 const verifyAuth = async (req, res, next) => {
-  const user = await getUser('token', req.cookies['token']);
+  const user = await DB.getUserByToken(req.cookies['token']);
   if (user) {
     req.user = user;
     next();
@@ -89,6 +87,7 @@ const verifyAuth = async (req, res, next) => {
 app.put('/api/user/updatePoints', verifyAuth, (req, res) => {
   req.user.points += req.body.points;
   res.send({ points: req.user.points });
+  DB.updateUser(req.user);
 });
 // getMe
 
@@ -132,18 +131,15 @@ app.put('/api/user/updateStreak', verifyAuth, (req, res) => {
         res.send({ streak: user.streak });
     }
   }
-
+  DB.updateUser(user);
 });
 
   
 function clearAuthCookie(res, user) {
-  delete user.token;
+  DB.updateUserRemoveAuth(user);
   res.clearCookie('token');
+  res.status(204).end();
 }
-
-
-
-
 
 
 
