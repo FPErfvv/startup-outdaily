@@ -113,7 +113,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Static middleware for frontend** - I added middleware to verify the users cookies before allowing any get or put requests.
 - [x] **Calls to third party endpoints** - I added api calls to a service called Meteo, which pulls 
 coordinate data from a city name and uses that to get the current weather at that place. The functions can be found in `service.js` and are called in the `entry.jsx` page. 
-- [x] **Backend service endpoints** - I added endpoints that allowed for user login, logout, resgistration, data retrieval, and data updates (points and streak)
+- [x] **Backend service endpoints** - I added endpoints that allowed for user login, logout, registration, data retrieval, and data updates (points and streak)
 - [x] **Frontend calls service endpoints** - Local Storage is no longer being used, and now has been replaced with service calls, many of which in are still in the `service.js` file. 
 - [x] **Supports registration, login, logout, and restricted endpoint** - Verifies user authentication via cookies and compares passwords with those stored in the backend to successfully log in the user. 
 
@@ -121,8 +121,8 @@ coordinate data from a city name and uses that to get the current weather at tha
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** - I took the user class that I had been using earlier and then simply stored each user instance in the database, instead of in the server array. 
+- [x] **Stores credentials in MongoDB** - I stored the cookie token when the person logs in along with the encrypted password. When the user logs out, it deletes the user cookie token. 
 
 ## 🚀 WebSocket deliverable
 
