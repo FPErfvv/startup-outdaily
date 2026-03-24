@@ -5,8 +5,6 @@ import { getUserInfo } from './service';
 const UserContext = createContext(null);
 
 export function UserProvider({ children }) {
-
-
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [currentPage, setCurrentPage] = useState('unauthenticated');
