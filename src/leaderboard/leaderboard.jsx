@@ -17,10 +17,15 @@ export function Leaderboard() {
         setMessageboard( prev => prev.length >= 10 ? [...prev.slice(1), message] : [...prev, message] );
         incrementMessageNumber();
     }
+    async function getScores() {
+        const res = await fetch('/api/scores');
+        const data = await res.json();
+        setLeaderboard(data.scores);
+    }
 
     React.useEffect(() => {
-        setLeaderboard(simulateLeaderboard());
-    }, [currentPage]);
+        getScores();
+    }, [currentPage, points]);
 
     React.useEffect(() => {
         let interval = null;
@@ -40,8 +45,6 @@ export function Leaderboard() {
                         let pointsDelta = randomUser.points - points;
                         let message = "Leaderboard updated! " + randomUser.username + " now has a score of " + randomUser.points + ". They are now " + (pointsDelta > 0 ? "ahead of" : "behind") + " you by " + Math.abs(pointsDelta) + " points";   
                         addMessage(message);
-                        updateLeaderboard(randomUser.username, randomUser.points, randomUser.streak);
-                        setLeaderboard(getLeaderboard());
                     }
                 }
             }, Math.floor(Math.random() * 1000)+5000);
