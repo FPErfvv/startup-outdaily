@@ -22,9 +22,6 @@ function setAuthCookie(res, user) {
   });
 }
 
-
-const users = [];
-
 async function createUser(email, username, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
