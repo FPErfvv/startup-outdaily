@@ -131,6 +131,16 @@ app.put('/api/user/updateStreak', verifyAuth, (req, res) => {
   DB.updateUser(user);
 });
 
+  // get scores
+  app.get('/api/scores', async (req, res) => {
+    const scores = await DB.getHighScores();
+    let scoresArray = [];
+    for (const score of scores) {
+      scoresArray.push({ username: score.username, points: score.points, streak: score.streak });
+    }
+    res.status(200).send({ scores: scoresArray });
+  });
+
   
 function clearAuthCookie(res, user) {
   
