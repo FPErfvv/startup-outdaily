@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const bcrypt = require('bcryptjs');
 
+const { peerProxy } = require('./peerProxy.js');
+
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
 
@@ -179,6 +181,8 @@ function isConsecutiveDays(dateStr1, dateStr2) {
 }
 
 const port = 4000;
-app.listen(port, function () {
+const httpService = app.listen(port, function () {
   console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
