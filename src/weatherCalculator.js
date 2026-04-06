@@ -11,7 +11,7 @@ export function calculatePoints(weatherInfo, duration) {
     let points = 0;
     let normalizedTemp = (parseFloat(temperature_2m) + 10)/50;
     let normalizedPrecipitation = parseFloat(precipitation)/100;
-    let normalizedRelative_humidity_2m = parseFloat(relative_humidity_2m)/100;
+    let normalizedRelative_humidity_2m = parseFloat(relative_humidity_2m) / 100;
     let normalizedCloud_cover = parseFloat(cloud_cover) / 100;
     let normalizedDuration = duration / 60;
 
@@ -22,7 +22,7 @@ export function calculatePoints(weatherInfo, duration) {
     console.log("normalizedDuration: ", normalizedDuration);
 
     points += normalizedCloud_cover * weights.cloud_cover;
-    points += normalizedTemp * weights.temp;
+    points += (1/normalizedTemp) * weights.temp;
     points += normalizedPrecipitation * weights.precipitation;
     points += normalizedRelative_humidity_2m * weights.relative_humidity_2m;
     points += normalizedDuration * weights.duration;
