@@ -1,5 +1,6 @@
 import React from 'react';
-import { simulateLeaderboard, updateLeaderboard, getLeaderboard } from '../service';
+import { getLeaderboard } from '../service';
+import { GameNotifier } from './gameNotifier';
 import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Leaderboard() {
@@ -7,6 +8,7 @@ export function Leaderboard() {
     const [ leaderboard, setLeaderboard] = React.useState([]);
     const navigate = useNavigate();
     const [messageboard, setMessageboard] = React.useState([]);
+    const [listOfScores, setListOfScores] = React.useState([]);
     const [messageNumber, setMessageNumber] = React.useState(1);
 
     function incrementMessageNumber() {
@@ -14,9 +16,14 @@ export function Leaderboard() {
     }
 
     function addMessage(message) {
-        setMessageboard( prev => prev.length >= 10 ? [...prev.slice(1), message] : [...prev, message] );
+        setMessageboard(messageboard => [...messageboard, message]);
         incrementMessageNumber();
     }
+
+    function addScore(score) {
+        setListOfScores(prev => prev.length >= 10 ? [...prev.slice(1), score] : [...prev, score] );
+    }
+
     async function getScores() {
         const res = await fetch('/api/scores');
         const data = await res.json();
@@ -24,36 +31,26 @@ export function Leaderboard() {
     }
 
     React.useEffect(() => {
+        GameNotifier.addHandler(addScore);
+    
+        return () => {
+          GameNotifier.removeHandler(addScore);
+        };
+      }, []);
+
+    React.useEffect(() => {
         getScores();
     }, [currentPage, points]);
 
     React.useEffect(() => {
-        let interval = null;
         if (currentPage === 'authenticated') {
-        interval = setInterval(() => {
-            
-            const lb = getLeaderboard();
-                if (lb.length > 0) {
-                    let length = lb.length;
-                    let randomIndex = Math.floor(Math.random() * length);
-                    let randomUser = lb[randomIndex];
-                    if (randomUser.username === username) {
-                        return;
-                    } else {
-                        randomUser.points += Math.floor(Math.random() * 50);
-                        randomUser.streak += 1;
-                        let pointsDelta = randomUser.points - points;
-                        let message = "Leaderboard updated! " + randomUser.username + " now has a score of " + randomUser.points + ". They are now " + (pointsDelta > 0 ? "ahead of" : "behind") + " you by " + Math.abs(pointsDelta) + " points";   
-                        addMessage(message);
-                    }
-                }
-            }, Math.floor(Math.random() * 1000)+5000);
-            return () => clearInterval(interval);
-        } else {
-            clearInterval(interval);
+            for (const score of listOfScores) {
+                const pointsDelta = score.points - points;
+                const message = "Leaderboard updated! " + score.username + " now has a score of " + score.points + ". They are now " + (pointsDelta > 0 ? "ahead of" : "behind") + " you by " + Math.abs(pointsDelta) + " points";   
+                addMessage(message);
+            }
         }
-        
-    }, [currentPage]);
+    }, [listOfScores]);
 
 
   return (
