@@ -40,7 +40,7 @@ export function Leaderboard() {
 
     React.useEffect(() => {
         getScores();
-    }, [currentPage, points]);
+    }, [currentPage, points, listOfScores]);
 
     React.useEffect(() => {
         if (currentPage === 'authenticated') {
