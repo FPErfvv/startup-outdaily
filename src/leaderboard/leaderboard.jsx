@@ -1,6 +1,6 @@
 import React from 'react';
 import { getLeaderboard } from '../service';
-import { GameNotifier } from './gameNotifier';
+import { GameNotifier } from '../gameNotifier';
 import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 export function Leaderboard() {
@@ -20,8 +20,8 @@ export function Leaderboard() {
         incrementMessageNumber();
     }
 
-    function addScore(score) {
-        setListOfScores(prev => prev.length >= 10 ? [...prev.slice(1), score] : [...prev, score] );
+    function addScore(event) {
+        setListOfScores(prev => prev.length >= 10 ? [...prev.slice(1), event] : [...prev, event] );
     }
 
     async function getScores() {
@@ -44,9 +44,9 @@ export function Leaderboard() {
 
     React.useEffect(() => {
         if (currentPage === 'authenticated') {
-            for (const score of listOfScores) {
-                const pointsDelta = score.points - points;
-                const message = "Leaderboard updated! " + score.username + " now has a score of " + score.points + ". They are now " + (pointsDelta > 0 ? "ahead of" : "behind") + " you by " + Math.abs(pointsDelta) + " points";   
+            for (const event of listOfScores) {
+                const pointsDelta = event.score - points;
+                const message = "Leaderboard updated! " + event.from + " now has a score of " + event.score + ". They are now " + (pointsDelta > 0 ? "ahead of" : "behind") + " you by " + Math.abs(pointsDelta) + " points";   
                 addMessage(message);
             }
         }
