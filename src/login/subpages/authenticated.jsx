@@ -1,12 +1,19 @@
 import React from 'react';
 import { useUser } from '../../UserContext';
 export function Authenticated() {
-    const { setCurrentPage, username } = useUser();
+    const { setCurrentPage, username, setAlertMessage } = useUser();
 
     function handleLogout(event) {
         event.preventDefault();
         fetch('/api/auth', {
           method: 'DELETE',
+          credentials: 'include',
+        }).then(async (res) => {
+          if (res.ok) {
+            setCurrentPage('unauthenticated');
+          } else {
+            setAlertMessage('Logout failed');
+          }
         });
         setCurrentPage('unauthenticated');
       }

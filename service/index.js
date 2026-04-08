@@ -61,18 +61,12 @@ app.put('/api/auth', async (req, res) => {
     }
   });
 
-  // logout
-app.delete('/api/auth', async (req, res) => {
-  const token = req.cookies['token'];
-  const user = await DB.getUserByToken(token);
-  if (user) {
-    clearAuthCookie(res, user);
-  }
-  res.status(204).end();
-});
-
-// Middleware to verify that the user is authorized to call an endpoint
+  // Middleware to verify that the user is authorized to call an endpoint
 const verifyAuth = async (req, res, next) => {
+  if (!req.cookies['token']) {
+    res.status(401).send({ msg: 'Unauthorized' });
+    return;
+  }
   const user = await DB.getUserByToken(req.cookies['token']);
   if (user) {
     req.user = user;
@@ -81,6 +75,14 @@ const verifyAuth = async (req, res, next) => {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 };
+
+  // logout
+app.delete('/api/auth', verifyAuth, async (req, res) => {
+  if (req.user) {
+    await clearAuthCookie(res, req.user);
+  }
+  res.status(204).end();
+});
 
 
 app.put('/api/user/updatePoints', verifyAuth, (req, res) => {
