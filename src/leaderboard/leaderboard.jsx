@@ -1,5 +1,4 @@
 import React from 'react';
-import { getLeaderboard } from '../service';
 import { GameNotifier } from '../gameNotifier';
 import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
