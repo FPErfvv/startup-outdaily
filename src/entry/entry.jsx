@@ -1,7 +1,7 @@
 import React from 'react';
 import "./entry.css"
 import { useUser } from '../UserContext';
-import { updateLeaderboard, getCoordinates, getWeather } from '../service';
+import { getCoordinates, getWeather } from '../service';
 import { calculatePoints } from '../weatherCalculator';
 import { useNavigate } from 'react-router-dom';
 import { GameNotifier } from '../gameNotifier';
@@ -59,7 +59,6 @@ export function Entry() {
         setPoints(newPoints);
         console.log("newStreak: ", newStreak);
         console.log("newPoints: ", newPoints);
-        updateLeaderboard(username, newPoints, newStreak);
         GameNotifier.broadcastEvent(username, newPoints);
     }
 

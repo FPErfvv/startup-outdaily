@@ -144,11 +144,9 @@ app.put('/api/user/updateStreak', verifyAuth, (req, res) => {
   });
 
   
-function clearAuthCookie(res, user) {
-  
+async function clearAuthCookie(res, user) {
+  await DB.updateUserRemoveAuth(user);
   res.clearCookie('token');
-  res.status(204).end();
-  DB.updateUserRemoveAuth(user);
 }
 
 
