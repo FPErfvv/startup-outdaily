@@ -128,8 +128,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - I connected the regular HTTP endpoints to the peer proxy, so it now listens to the WebSocket connections. 
+- [x] **Frontend makes WebSocket connection** - When a user submits an entry, it now sends a WebSocket message to everyone to alert them that their score was changed. 
+- [x] **Data sent over WebSocket connection** - User scores are now sent over the websocket connection
+- [x] **WebSocket data displayed** - On the `leaderboard.jsx` page, the messages are displayed when a user gains points. 
+- [x] **Application is fully functional** - Test and fake functions were all deleted. 
