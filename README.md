@@ -132,4 +132,4 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Frontend makes WebSocket connection** - When a user submits an entry, it now sends a WebSocket message to everyone to alert them that their score was changed. 
 - [x] **Data sent over WebSocket connection** - User scores are now sent over the websocket connection
 - [x] **WebSocket data displayed** - On the `leaderboard.jsx` page, the messages are displayed when a user gains points. 
-- [x] **Application is fully functional** - Test and fake functions were all deleted. 
+- [x] **Application is fully functional** - Test and fake functions were all deleted. There are no placeholder functions or functionality, everything works as intended. 
