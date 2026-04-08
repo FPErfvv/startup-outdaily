@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 export function Leaderboard() {
     const { username, currentPage, points } = useUser();
     const [ leaderboard, setLeaderboard] = React.useState([]);
-    const navigate = useNavigate();
     const [messageboard, setMessageboard] = React.useState([]);
     const [listOfScores, setListOfScores] = React.useState([]);
     const [messageNumber, setMessageNumber] = React.useState(1);
@@ -14,13 +13,9 @@ export function Leaderboard() {
         setMessageNumber(prev => prev + 1);
     }
 
-    function addMessage(message) {
-        setMessageboard(messageboard => [...messageboard, message]);
-        incrementMessageNumber();
-    }
-
     function addScore(event) {
         setListOfScores(prev => prev.length >= 10 ? [...prev.slice(1), event] : [...prev, event] );
+        incrementMessageNumber();
     }
 
     async function getScores() {
@@ -40,16 +35,6 @@ export function Leaderboard() {
     React.useEffect(() => {
         getScores();
     }, [currentPage, points, listOfScores]);
-
-    React.useEffect(() => {
-        if (currentPage === 'authenticated') {
-            for (const event of listOfScores) {
-                const pointsDelta = event.score - points;
-                const message = "Leaderboard updated! " + event.from + " now has a score of " + event.score + ". They are now " + (pointsDelta > 0 ? "ahead of" : "behind") + " you by " + Math.abs(pointsDelta) + " points";   
-                addMessage(message);
-            }
-        }
-    }, [listOfScores]);
 
 
   return (
@@ -85,10 +70,12 @@ export function Leaderboard() {
                     <h5 >Messageboard: </h5>
                     <p>The leaderboard will automatically adjust when the rankings change as a result of a change in a users score.</p>
                     
-                        {messageboard.map((message, index) => {
+                        {listOfScores.map((event, index) => {
+                            const pointsDelta = event.score - points;
+                            const message = "Leaderboard updated! " + event.from + " now has a score of " + event.score + ". They are now " + (pointsDelta > 0 ? "ahead of" : "behind") + " you by " + Math.abs(pointsDelta) + " points";   
                             return (
                                 <div key={index} className="bg-white border rounded-3 px-3 py-3 mb-3"> 
-                                    <h6>Message {messageNumber - (messageboard.length - index)} ⚠️:</h6>
+                                    <h6>Message {messageNumber - (listOfScores.length - index)} ⚠️:</h6>
                                     <p>{message}</p> 
                                 </div>
                             )

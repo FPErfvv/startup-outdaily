@@ -9,9 +9,10 @@ class EventMessage {
 
 class GameEventNotifier {
   events = [];
-  handlers = [];
+  
 
   constructor() {
+    this.handlerFunction = null;
     let port = window.location.port;
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
@@ -29,21 +30,19 @@ class GameEventNotifier {
   }
 
   addHandler(handler) {
-    this.handlers.push(handler);
+    this.handlerFunction = handler;
   }
 
   removeHandler(handler) {
-    this.handlers.filter((h) => h !== handler);
+    this.handlerFunction = null;
   }
 
   receiveEvent(event) {
     this.events.push(event);
 
-    this.events.forEach((e) => {
-      this.handlers.forEach((handler) => {
-        handler(e);
-      });
-    });
+    if (this.handlerFunction) {
+      this.handlerFunction(event);
+    }
   }
 }
 
